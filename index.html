@@ -6,511 +6,108 @@
   <meta name="theme-color" content="#1f5f4a" />
   <title>파피루스 | 망원 책방 탐방</title>
   <style>
-    :root{
-      --bg:#f7f5ef; --paper:#fffdf8; --ink:#25312c; --muted:#6f7b75;
-      --green:#1f5f4a; --green2:#2f7a60; --mint:#dfeee7; --line:#dfe5df;
-      --yellow:#f4cf67; --danger:#b54d43; --shadow:0 10px 30px rgba(31,95,74,.09);
-      --r:20px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
-    button,input,select{font:inherit}
-    button{cursor:pointer}
-    .wrap{width:min(100%,560px);margin:0 auto;padding:0 16px 48px}
-    .top{position:sticky;top:0;z-index:20;background:rgba(247,245,239,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(31,95,74,.08)}
-    .topin{width:min(100%,560px);margin:auto;padding:13px 16px;display:flex;justify-content:space-between;align-items:center}
-    .brand{font-weight:900;letter-spacing:-.03em}.brand small{font-weight:700;color:var(--green)}
-    .badge{font-size:12px;font-weight:800;color:var(--green);background:var(--mint);padding:7px 10px;border-radius:999px}
-    .hero{padding:24px 0 8px}
-    h1{font-size:30px;line-height:1.12;letter-spacing:-.045em;margin:0 0 10px}
-    h2{font-size:20px;letter-spacing:-.035em;margin:0}
-    h3{font-size:16px;margin:0}
-    p{margin:0}
-    .sub{color:var(--muted);font-size:14px}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);margin-top:14px}
-    .card.flat{box-shadow:none}
-    .notice{background:#eef6f2;border-color:#c8ddd3}
-    .notice strong{color:var(--green)}
-    .section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}
-    .num{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:50%;background:var(--green);color:white;font-weight:900;font-size:13px;margin-right:7px}
-    label{display:block;font-size:12px;font-weight:800;color:#56625c;margin:12px 0 6px}
-    input,select{width:100%;border:1px solid #ccd5cf;background:white;border-radius:14px;padding:12px 13px;color:var(--ink);outline:none}
-    input:focus,select:focus{border-color:var(--green2);box-shadow:0 0 0 3px rgba(47,122,96,.11)}
-    .choice{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-    .choice button{border:1px solid #cfd8d2;background:white;padding:11px 5px;border-radius:13px;font-weight:900;color:#66726c}
-    .choice button.on{background:var(--green);border-color:var(--green);color:white}
-    .members{display:grid;gap:10px;margin-top:8px}
-    .member{display:grid;grid-template-columns:92px 1fr;gap:8px}
-    .member input{margin:0}
-    .btn{width:100%;border:0;border-radius:15px;padding:14px 15px;font-weight:900;transition:.15s}
-    .btn:active{transform:scale(.985)}
-    .primary{background:var(--green);color:white}
-    .secondary{background:var(--mint);color:var(--green)}
-    .ghost{background:white;color:var(--green);border:1px solid #bfd2c8}
-    .danger{background:#f8ebe9;color:var(--danger)}
-    .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-    .hidden{display:none!important}
-    .codebox{text-align:center;padding:19px;border:2px dashed #89ae9c;border-radius:18px;background:#f2f8f5;margin-top:12px}
-    .code{font-size:28px;font-weight:950;letter-spacing:.08em;color:var(--green);margin:8px 0}
-    .urgent{font-size:15px;font-weight:900;color:#8c5a00;background:#fff3cb;border:1px solid #f0d57a;border-radius:14px;padding:11px 12px;margin-top:12px}
-    .checkline{display:flex;gap:9px;align-items:flex-start;margin-top:12px;font-size:13px;font-weight:700;color:#5f6b65}
-    .checkline input{width:18px;height:18px;margin:2px 0 0}
-    .progress{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
-    .step{padding:10px 6px;border-radius:13px;text-align:center;background:#edf0ed;color:#87918c;font-size:12px;font-weight:900}
-    .step.done{background:var(--green);color:white}
-    .shopgrid{display:grid;gap:10px}
-    .shop{border:1px solid var(--line);border-radius:17px;padding:14px;background:#fff}
-    .shop.selected{border:2px solid var(--green);background:#f2f8f5}
-    .shophead{display:flex;justify-content:space-between;gap:10px}
-    .shopname{font-size:16px;font-weight:950;letter-spacing:-.025em}
-    .addr{font-size:12px;color:var(--muted);margin-top:3px}
-    .map{font-size:12px;font-weight:900;color:var(--green);text-decoration:none;white-space:nowrap}
-    .recommend{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-    .chip{background:#eef6f2;border:1px solid #c9ddd4;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;color:var(--green)}
-    .photo{margin-top:13px;border:1.5px dashed #b8c8bf;border-radius:16px;padding:14px;text-align:center;background:#fafcfb}
-    .photo input{padding:0;border:0;background:transparent}
-    .preview{width:100%;max-height:260px;object-fit:cover;border-radius:13px;margin-top:10px}
-    .visitlog{display:grid;gap:8px;margin-top:10px}
-    .visititem{padding:11px 12px;border-radius:13px;background:#f2f5f3;font-size:13px}
-    .visititem b{color:var(--green)}
-    .complete{background:#1f5f4a;color:white;border-color:#1f5f4a}
-    .complete .sub{color:#d8e9e1}
-    .footer{text-align:center;color:#89938e;font-size:11px;padding-top:24px}
-    .modal{position:fixed;inset:0;background:rgba(13,28,21,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding:16px}
-    .sheet{width:min(100%,560px);background:var(--paper);border-radius:24px 24px 18px 18px;padding:20px;box-shadow:0 -18px 60px rgba(0,0,0,.18)}
-    .sheet h2{font-size:22px}
-    .small{font-size:12px;color:var(--muted)}
-    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;background:#22332b;color:white;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:.2s}
-    .toast.show{opacity:1}
-    .reset{margin-top:18px}
-    @media(min-width:520px){.wrap{padding-left:20px;padding-right:20px}.hero{padding-top:30px}}
+    :root{--bg:#f7f5ef;--paper:#fffdf8;--ink:#25312c;--muted:#6f7b75;--green:#1f5f4a;--green2:#2f7a60;--mint:#dfeee7;--line:#dfe5df;--yellow:#fff2c5;--red:#a84940;--shadow:0 10px 30px rgba(31,95,74,.09);--r:20px}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+    .wrap{width:min(100%,560px);margin:0 auto;padding:0 16px 48px}.top{position:sticky;top:0;z-index:20;background:#f7f5ef;border-bottom:1px solid rgba(31,95,74,.08)}.topin{width:min(100%,560px);margin:auto;padding:13px 16px;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:950;letter-spacing:-.035em}.brand small{font-weight:750;color:var(--green)}.badge{font-size:12px;font-weight:850;color:var(--green);background:var(--mint);padding:7px 10px;border-radius:999px}.badge.bad{color:#8a4039;background:#f7e5e2}
+    .hero{padding:25px 0 8px}h1{font-size:30px;line-height:1.12;letter-spacing:-.045em;margin:0 0 10px}h2{font-size:20px;letter-spacing:-.035em;margin:0}h3{font-size:16px;margin:0}p{margin:0}.sub{color:var(--muted);font-size:14px}.small{font-size:12px;color:var(--muted)}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);margin-top:14px}.flat{box-shadow:none}.notice{background:#eef6f2;border-color:#c8ddd3}.notice strong{color:var(--green)}.warning{background:var(--yellow);border-color:#ead184}.warning strong{color:#795900}.section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}.num{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:50%;background:var(--green);color:white;font-weight:900;font-size:13px;margin-right:7px}
+    label{display:block;font-size:12px;font-weight:850;color:#56625c;margin:12px 0 6px}input{width:100%;border:1px solid #ccd5cf;background:white;border-radius:14px;padding:12px 13px;color:var(--ink);outline:none}input:focus{border-color:var(--green2);box-shadow:0 0 0 3px rgba(47,122,96,.11)}
+    .choice{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.choice button{border:1px solid #cfd8d2;background:white;padding:11px 5px;border-radius:13px;font-weight:900;color:#66726c}.choice button.on{background:var(--green);border-color:var(--green);color:white}.members{display:grid;gap:10px;margin-top:8px}.member{display:grid;grid-template-columns:92px 1fr;gap:8px}
+    .btn{width:100%;border:0;border-radius:15px;padding:14px 15px;font-weight:900}.btn:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--green);color:white}.secondary{background:var(--mint);color:var(--green)}.ghost{background:white;color:var(--green);border:1px solid #bfd2c8}.danger{background:#f8ebe9;color:var(--red)}.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .codebox{text-align:center;padding:19px;border:2px dashed #89ae9c;border-radius:18px;background:#f2f8f5;margin-top:12px}.code{font-size:28px;font-weight:950;letter-spacing:.08em;color:var(--green);margin:8px 0}.urgent{font-size:15px;font-weight:900;color:#755500;background:#fff3cb;border:1px solid #f0d57a;border-radius:14px;padding:11px 12px;margin-top:12px}.checkline{display:flex;gap:9px;align-items:flex-start;margin-top:12px;font-size:13px;font-weight:750;color:#5f6b65}.checkline input{width:18px;height:18px;margin:2px 0 0}
+    .progress{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.step{padding:10px 6px;border-radius:13px;text-align:center;background:#edf0ed;color:#87918c;font-size:12px;font-weight:900}.step.done{background:var(--green);color:white}.shopgrid{display:grid;gap:10px}.shop{border:1px solid var(--line);border-radius:17px;padding:14px;background:#fff}.shop.selected{border:2px solid var(--green);background:#f2f8f5}.shophead{display:flex;justify-content:space-between;gap:10px}.shopname{font-size:16px;font-weight:950;letter-spacing:-.025em}.addr{font-size:12px;color:var(--muted);margin-top:3px}.map{font-size:12px;font-weight:900;color:var(--green);text-decoration:none;white-space:nowrap}.recommend{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.chip{background:#eef6f2;border:1px solid #c9ddd4;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;color:var(--green)}
+    .photo{margin-top:13px;border:1.5px dashed #b8c8bf;border-radius:16px;padding:14px;text-align:center;background:#fafcfb}.photo input{padding:0;border:0;background:transparent}.preview{width:100%;max-height:260px;object-fit:cover;border-radius:13px;margin-top:10px}.visitlog{display:grid;gap:8px;margin-top:10px}.visititem{padding:11px 12px;border-radius:13px;background:#f2f5f3;font-size:13px}.visititem b{color:var(--green)}.complete{background:var(--green);color:white;border-color:var(--green)}.complete .sub{color:#d8e9e1}.serverok{font-size:12px;color:var(--green);font-weight:850}.serverbad{font-size:12px;color:var(--red);font-weight:850}
+    .modal{position:fixed;inset:0;background:rgba(13,28,21,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding:16px}.sheet{width:min(100%,560px);background:var(--paper);border-radius:24px 24px 18px 18px;padding:20px;box-shadow:0 -18px 60px rgba(0,0,0,.18)}.sheet h2{font-size:22px}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;background:#22332b;color:white;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:850;opacity:0;pointer-events:none}.toast.show{opacity:1}.footer{text-align:center;color:#89938e;font-size:11px;padding-top:24px}.reset{margin-top:18px}
   </style>
+  <script src="config.js"></script>
 </head>
 <body>
-  <header class="top">
-    <div class="topin">
-      <div class="brand">PAPYRUS <small>망원 책방 탐방</small></div>
-      <div class="badge" id="headerStatus">START</div>
-    </div>
-  </header>
+<header class="top"><div class="topin"><div class="brand">PAPYRUS <small>망원 책방 탐방</small></div><div class="badge" id="headerStatus">START</div></div></header>
+<main class="wrap">
+  <section class="hero"><h1>세 곳의 책방을<br>우리 팀 방식으로 걷기</h1><p class="sub">한 곳을 다녀온 뒤 다음 책방을 고릅니다. 인증할 때마다 사진은 선생님 Drive에 바로 제출됩니다.</p></section>
+  <section class="card notice"><p><strong>오늘의 규칙</strong></p><p class="sub" style="margin-top:6px">대표 1명이 사용합니다. 책방마다 인증사진 1장씩 총 3장. 제출이 확인되어야 다음 단계로 넘어갑니다.</p><p id="serverState" class="serverbad" style="margin-top:9px">제출 서버 확인 중…</p></section>
+  <section id="serverWarning" class="card warning hidden"><p><strong>교사용 Drive 연결이 아직 완료되지 않았습니다.</strong></p><p class="sub" style="margin-top:5px">연결이 끝나기 전에는 모둠 생성과 사진 제출을 시작하지 마세요.</p></section>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>세 곳의 책방을<br>우리 팀 방식으로 걷기</h1>
-      <p class="sub">처음부터 세 곳을 정하지 않아도 됩니다. 한 곳을 다녀온 뒤, 가까운 다음 책방을 추천해 줄게요.</p>
-    </section>
+  <section id="setupCard" class="card">
+    <div class="section-title"><h2><span class="num">1</span>우리 모둠 만들기</h2></div>
+    <label>모둠원은 몇 명인가요?</label>
+    <div class="choice" id="sizeChoice"><button type="button" data-size="2">2명</button><button type="button" data-size="3">3명</button><button type="button" data-size="4">4명</button><button type="button" data-size="5">5명</button></div>
+    <div id="memberArea" class="hidden"><label>모둠원 학번과 이름</label><div id="memberInputs" class="members"></div><button id="createTeamBtn" type="button" class="btn primary" style="margin-top:14px" onclick="createTeam()">모둠 코드 만들기</button></div>
+    <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line)"><h3>이미 모둠을 만들었나요?</h3><p class="small" style="margin-top:4px">다른 휴대폰에서도 모둠 코드만 있으면 서버에 저장된 진행도를 불러올 수 있어요.</p><div class="btnrow"><input id="resumeCode" placeholder="예: PAP-4K7Q" maxlength="8" style="text-transform:uppercase"><button type="button" class="btn ghost" onclick="resumeByCode()">이어하기</button></div></div>
+  </section>
 
-    <section class="card notice">
-      <p><strong>오늘의 규칙</strong></p>
-      <p class="sub" style="margin-top:6px">팀 대표 1명이 이 사이트를 사용합니다. 같은 휴대폰으로 1차, 2차, 3차 인증을 이어서 진행하세요. 각 책방에서 인증사진 1장씩 총 3장을 남깁니다.</p>
-    </section>
+  <section id="teamCard" class="card hidden">
+    <div class="section-title"><h2><span class="num">2</span>팀 준비 완료</h2><button class="btn ghost" style="width:auto;padding:8px 11px" onclick="shareTeamCode()">코드 보내기</button></div>
+    <div class="codebox"><div class="small">우리 모둠 코드</div><div class="code" id="teamCodeText"></div><div id="memberSummary" class="small"></div></div>
+    <div class="urgent">📣 이 코드를 <b>지금 바로 모둠 카톡방에 보내세요.</b><br>대표 학생이 바뀌어도 이 코드로 이어갈 수 있어요.</div>
+    <div class="btnrow"><button class="btn secondary" onclick="copyCode()">코드 복사</button><button class="btn primary" onclick="shareTeamCode()">카카오톡으로 보내기</button></div>
+    <label class="checkline"><input type="checkbox" id="sharedCheck" onchange="toggleStartButton()"><span>모둠 카톡방에 코드를 보냈어요.</span></label>
+    <button id="startWalkBtn" class="btn primary" style="margin-top:10px" disabled onclick="startWalk()">탐방 시작하기</button>
+  </section>
 
-    <section id="setupCard" class="card">
-      <div class="section-title"><h2><span class="num">1</span>우리 모둠 만들기</h2></div>
-      <label>모둠원은 몇 명인가요?</label>
-      <div class="choice" id="sizeChoice">
-        <button type="button" data-size="2">2명</button>
-        <button type="button" data-size="3">3명</button>
-        <button type="button" data-size="4">4명</button>
-        <button type="button" data-size="5">5명</button>
-      </div>
-      <div id="memberArea" class="hidden">
-        <label>모둠원 학번과 이름</label>
-        <div id="memberInputs" class="members"></div>
-        <button type="button" class="btn primary" style="margin-top:14px" onclick="createTeam()">모둠 코드 만들기</button>
-      </div>
+  <section id="walkCard" class="card hidden">
+    <div class="section-title"><h2><span class="num">3</span><span id="roundTitle">1차 책방 인증</span></h2><span class="badge" id="roundBadge">0 / 3</span></div>
+    <div class="progress"><div class="step" id="step1">1차</div><div class="step" id="step2">2차</div><div class="step" id="step3">3차</div></div>
+    <div id="recommendBox" class="hidden"><p class="small"><b style="color:var(--green)">가까운 다음 책방 추천</b> · 방금 방문한 곳 기준</p><div class="recommend" id="recommendList"></div></div>
+    <label>이번에 방문한 책방을 선택하세요.</label><div id="shopGrid" class="shopgrid"></div>
+    <div id="photoBox" class="photo hidden"><b id="photoTitle">인증사진 1장</b><p class="small" style="margin:4px 0 10px">책방 앞 또는 내부에서 방문이 확인되는 사진을 골라주세요. 다른 손님의 얼굴·개인정보는 가급적 찍지 마세요.</p><input id="photoInput" type="file" accept="image/*" capture="environment"><img id="photoPreview" class="preview hidden" alt="인증사진 미리보기"><button id="submitVisitBtn" class="btn primary" style="margin-top:12px" onclick="saveVisit()">Drive에 인증 제출</button><p id="uploadNote" class="small" style="margin-top:8px"></p></div>
+  </section>
 
-      <div id="resumeArea" style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line)">
-        <h3>이미 모둠을 만들었나요?</h3>
-        <p class="small" style="margin-top:4px">대표 학생이 같은 휴대폰을 사용한다면 자동으로 이어집니다. 코드가 필요하면 아래에 입력하세요.</p>
-        <div class="btnrow">
-          <input id="resumeCode" placeholder="예: PAP-4K7Q" maxlength="8" style="text-transform:uppercase" />
-          <button type="button" class="btn ghost" onclick="resumeByCode()">이어하기</button>
-        </div>
-      </div>
-    </section>
+  <section id="logCard" class="card hidden"><h3>우리 팀 탐방 기록</h3><div id="visitLog" class="visitlog"></div></section>
+  <section id="completeCard" class="card complete hidden"><h2>🎉 세 곳 탐방·제출 완료!</h2><p class="sub" style="margin-top:6px">인증사진 3장이 모두 선생님 Drive에 저장됐어요. 따로 카톡으로 사진을 보낼 필요 없습니다.</p><button class="btn" style="margin-top:14px;background:white;color:var(--green)" onclick="copySummary()">우리 팀 기록 복사</button></section>
+  <section class="card flat"><div class="section-title"><h3>책방 전체 목록</h3><span class="small">8곳</span></div><div id="allShops" class="visitlog"></div></section>
+  <button class="btn danger reset" onclick="resetLocal()">이 기기의 저장정보만 초기화</button>
+  <footer class="footer">대인고등학교 도서부 파피루스 · 망원동 책방 탐방</footer>
+</main>
 
-    <section id="teamCard" class="card hidden">
-      <div class="section-title">
-        <h2><span class="num">2</span>팀 준비 완료</h2>
-        <button class="btn ghost" style="width:auto;padding:8px 11px" onclick="shareTeamCode()">코드 보내기</button>
-      </div>
-      <div class="codebox">
-        <div class="small">우리 모둠 코드</div>
-        <div class="code" id="teamCodeText"></div>
-        <div id="memberSummary" class="small"></div>
-      </div>
-      <div class="urgent">📣 이 코드를 <b>지금 바로 모둠 카톡방에 보내세요.</b><br>대표 학생이 바뀌거나 헷갈릴 때 확인할 수 있어요.</div>
-      <div class="btnrow">
-        <button class="btn secondary" onclick="copyCode()">코드 복사</button>
-        <button class="btn primary" onclick="shareTeamCode()">카카오톡으로 보내기</button>
-      </div>
-      <label class="checkline">
-        <input type="checkbox" id="sharedCheck" onchange="toggleStartButton()" />
-        <span>모둠 카톡방에 코드를 보냈어요.</span>
-      </label>
-      <button id="startWalkBtn" class="btn primary" style="margin-top:10px" disabled onclick="startWalk()">탐방 시작하기</button>
-    </section>
-
-    <section id="walkCard" class="card hidden">
-      <div class="section-title">
-        <h2><span class="num">3</span><span id="roundTitle">1차 책방 인증</span></h2>
-        <span class="badge" id="roundBadge">0 / 3</span>
-      </div>
-      <div class="progress">
-        <div class="step" id="step1">1차</div>
-        <div class="step" id="step2">2차</div>
-        <div class="step" id="step3">3차</div>
-      </div>
-
-      <div id="recommendBox" class="hidden">
-        <p class="small"><b style="color:var(--green)">가까운 다음 책방 추천</b> · 방금 방문한 곳을 기준으로 골랐어요.</p>
-        <div class="recommend" id="recommendList"></div>
-      </div>
-
-      <label>이번에 방문한 책방을 선택하세요.</label>
-      <div id="shopGrid" class="shopgrid"></div>
-
-      <div id="photoBox" class="photo hidden">
-        <b id="photoTitle">인증사진 1장</b>
-        <p class="small" style="margin:4px 0 10px">책방 앞 또는 내부에서 팀 방문이 확인되는 사진을 골라주세요.</p>
-        <input id="photoInput" type="file" accept="image/*" capture="environment" />
-        <img id="photoPreview" class="preview hidden" alt="인증사진 미리보기" />
-        <button class="btn primary" style="margin-top:12px" onclick="saveVisit()">이번 책방 인증 완료</button>
-      </div>
-    </section>
-
-    <section id="logCard" class="card hidden">
-      <h3>우리 팀 탐방 기록</h3>
-      <div id="visitLog" class="visitlog"></div>
-    </section>
-
-    <section id="completeCard" class="card complete hidden">
-      <h2>🎉 세 곳 탐방 완료!</h2>
-      <p class="sub" style="margin-top:6px">마지막으로 모둠 정보와 인증사진 3장을 카카오톡으로 한 번에 공유해 제출하세요.</p>
-      <button class="btn" style="margin-top:14px;background:white;color:var(--green)" onclick="shareFinal()">카카오톡으로 최종 제출</button>
-      <button class="btn" style="margin-top:8px;background:#dfeee7;color:var(--green)" onclick="copyFinalSummary()">제출 문구만 복사</button>
-    </section>
-
-    <section class="card flat">
-      <div class="section-title"><h3>책방 전체 목록</h3><span class="small">8곳</span></div>
-      <div id="allShops" class="visitlog"></div>
-    </section>
-
-    <button class="btn danger reset" onclick="resetAll()">이 기기의 탐방 기록 초기화</button>
-    <footer class="footer">대인고등학교 도서부 파피루스 · 망원동 책방 탐방</footer>
-  </main>
-
-  <div id="codeModal" class="modal hidden">
-    <div class="sheet">
-      <h2>모둠 코드가 생겼어요!</h2>
-      <p class="sub" style="margin-top:5px">잊기 전에 지금 바로 카톡방에 보내세요.</p>
-      <div class="codebox">
-        <div class="code" id="modalCode"></div>
-        <div class="small">대표 학생은 오늘 활동이 끝날 때까지 같은 휴대폰을 사용해 주세요.</div>
-      </div>
-      <button class="btn primary" style="margin-top:12px" onclick="shareTeamCode()">카카오톡으로 지금 보내기</button>
-      <button class="btn secondary" style="margin-top:8px" onclick="copyCode()">코드 복사하기</button>
-      <label class="checkline">
-        <input type="checkbox" id="modalSharedCheck" onchange="syncSharedCheck(this.checked)" />
-        <span>카톡방에 보냈어요.</span>
-      </label>
-      <button id="modalContinueBtn" class="btn ghost" style="margin-top:10px" disabled onclick="closeCodeModal()">확인, 탐방 준비하기</button>
-    </div>
-  </div>
-
-  <div id="toast" class="toast"></div>
+<div id="codeModal" class="modal hidden"><div class="sheet"><h2>모둠 코드가 생겼어요!</h2><p class="sub" style="margin-top:5px">잊기 전에 지금 바로 카톡방에 보내세요.</p><div class="codebox"><div class="code" id="modalCode"></div><div class="small">다른 휴대폰에서도 이 코드로 진행도를 불러올 수 있어요.</div></div><button class="btn primary" style="margin-top:12px" onclick="shareTeamCode()">카카오톡으로 지금 보내기</button><button class="btn secondary" style="margin-top:8px" onclick="copyCode()">코드 복사하기</button><label class="checkline"><input type="checkbox" id="modalSharedCheck" onchange="syncSharedCheck(this.checked)"><span>카톡방에 보냈어요.</span></label><button id="modalContinueBtn" class="btn ghost" style="margin-top:10px" disabled onclick="closeCodeModal()">확인, 탐방 준비하기</button></div></div>
+<div id="toast" class="toast"></div>
 
 <script>
-const SHOPS = [
-  {id:'low', name:'로우북스', addr:'서울 마포구 포은로 56', near:['denmark','zero','travel']},
-  {id:'denmark', name:'덴마크 서재', addr:'서울 마포구 포은로 61', near:['low','zero','travel']},
-  {id:'tailtango', name:'테일탱고', addr:'서울 마포구 망원로 62-3', near:['gaga','summer','seasons']},
-  {id:'gaga', name:'가가77페이지', addr:'서울 마포구 망원로 74-1', near:['tailtango','summer','seasons']},
-  {id:'zero', name:'제로헌드레드', addr:'서울 마포구 희우정로10길 33', near:['summer','low','denmark']},
-  {id:'summer', name:'여름맨숀', addr:'서울 마포구 희우정로10길 2', near:['zero','tailtango','gaga']},
-  {id:'travel', name:'여행마을', addr:'서울 마포구 월드컵로17길 57', near:['low','denmark','seasons']},
-  {id:'seasons', name:'시즌스', addr:'서울 마포구 망원로3길 15', near:['travel','gaga','tailtango']}
+const API_URL=(window.PAPYRUS_API_URL||'').trim();
+const SHOPS=[
+{id:'low',name:'로우북스',addr:'서울 마포구 포은로 56 1층',near:['denmark','tailtango','gaga']},
+{id:'denmark',name:'덴마크 서재',addr:'서울 마포구 포은로 61 안채',near:['low','tailtango','gaga']},
+{id:'tailtango',name:'테일탱고',addr:'서울 마포구 망원로 62-3 1층',near:['gaga','low','denmark']},
+{id:'gaga',name:'가가77페이지',addr:'서울 마포구 망원로 74-1 지하',near:['tailtango','denmark','low']},
+{id:'zero',name:'제로헌드레드',addr:'서울 마포구 희우정로10길 33 1층',near:['summer','low','seasons']},
+{id:'summer',name:'여름맨숀',addr:'서울 마포구 희우정로10길 2 1층',near:['zero','seasons','low']},
+{id:'travel',name:'여행마을',addr:'서울 마포구 월드컵로17길 57 지하1층',near:['gaga','tailtango','denmark']},
+{id:'seasons',name:'시즌스',addr:'서울 마포구 망원로3길 15 2층',near:['summer','zero','gaga']}
 ];
+const STATE_KEY='papyrus_mangwon_drive_v1';let state=loadState();let teamSize=0,selectedShop=null,pendingPhotoData='';
+function $(id){return document.getElementById(id)}function toast(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
+function loadState(){try{return JSON.parse(localStorage.getItem(STATE_KEY))||null}catch(e){return null}}function saveState(){localStorage.setItem(STATE_KEY,JSON.stringify(state))}
+function mapUrl(name){return 'https://map.naver.com/p/search/'+encodeURIComponent(name+' 망원')}function shopById(id){return SHOPS.find(s=>s.id===id)}function shopByName(name){return SHOPS.find(s=>s.name===name)}
+function ensureApi(){if(!API_URL){$('serverWarning').classList.remove('hidden');$('serverState').textContent='⚠ Drive 연결 전';$('serverState').className='serverbad';return false}return true}
+function jsonp(params,timeout=12000){return new Promise((resolve,reject)=>{if(!ensureApi())return reject(new Error('Drive 연결 전입니다.'));const cb='papyrus_cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);const s=document.createElement('script');const timer=setTimeout(()=>{cleanup();reject(new Error('서버 응답 시간이 초과됐어요.'))},timeout);function cleanup(){clearTimeout(timer);delete window[cb];s.remove()}window[cb]=d=>{cleanup();resolve(d)};params.callback=cb;s.src=API_URL+(API_URL.includes('?')?'&':'?')+new URLSearchParams(params).toString();s.onerror=()=>{cleanup();reject(new Error('제출 서버에 연결할 수 없어요.'))};document.body.appendChild(s)})}
+async function postNoCors(payload){if(!ensureApi())throw new Error('Drive 연결 전입니다.');await fetch(API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)})}
+async function pingServer(){if(!API_URL){ensureApi();return}try{const d=await jsonp({action:'ping'});if(d.ok){$('serverState').textContent='✓ Drive 제출 서버 연결됨';$('serverState').className='serverok';$('serverWarning').classList.add('hidden')}else throw new Error()}catch(e){$('serverState').textContent='⚠ Drive 제출 서버 연결 실패';$('serverState').className='serverbad';$('serverWarning').classList.remove('hidden')}}
 
-const STATE_KEY = 'papyrus_mangwon_v3';
-let state = loadState();
-let teamSize = 0;
-let selectedShop = null;
-let pendingPhotoBlob = null;
-
-function $(id){ return document.getElementById(id); }
-function toast(msg){
-  const el=$('toast'); el.textContent=msg; el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),1800);
-}
-function loadState(){
-  try { return JSON.parse(localStorage.getItem(STATE_KEY)) || null; } catch(e){ return null; }
-}
-function saveState(){ localStorage.setItem(STATE_KEY, JSON.stringify(state)); }
-function mapUrl(name){ return 'https://map.naver.com/p/search/' + encodeURIComponent(name + ' 망원'); }
-function shopById(id){ return SHOPS.find(s=>s.id===id); }
-
-document.querySelectorAll('#sizeChoice button').forEach(btn=>{
-  btn.addEventListener('click',()=>setTeamSize(Number(btn.dataset.size)));
-});
-
-function setTeamSize(size){
-  teamSize=size;
-  document.querySelectorAll('#sizeChoice button').forEach(b=>b.classList.toggle('on',Number(b.dataset.size)===size));
-  const box=$('memberInputs'); box.innerHTML='';
-  for(let i=1;i<=size;i++){
-    const row=document.createElement('div'); row.className='member';
-    row.innerHTML=`<input id="sid${i}" placeholder="${i}번 학번" inputmode="numeric"><input id="sname${i}" placeholder="${i}번 이름">`;
-    box.appendChild(row);
-  }
-  $('memberArea').classList.remove('hidden');
-}
-
-function makeCode(){
-  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  const a=new Uint32Array(4); crypto.getRandomValues(a);
-  let out='PAP-'; for(let i=0;i<4;i++) out += chars[a[i]%chars.length];
-  return out;
-}
-
-function createTeam(){
-  if(!teamSize) return toast('모둠 인원을 먼저 선택하세요.');
-  const members=[];
-  for(let i=1;i<=teamSize;i++){
-    const sid=$('sid'+i).value.trim(), name=$('sname'+i).value.trim();
-    if(!sid || !name) return toast(`${i}번 모둠원의 학번과 이름을 입력하세요.`);
-    members.push({sid,name});
-  }
-  state={code:makeCode(),members,visits:[],createdAt:new Date().toISOString(),started:false};
-  saveState();
-  renderTeam();
-  $('codeModal').classList.remove('hidden');
-  $('modalCode').textContent=state.code;
-}
-
-function renderTeam(){
-  if(!state) return;
-  $('setupCard').classList.add('hidden');
-  $('teamCard').classList.remove('hidden');
-  $('teamCodeText').textContent=state.code;
-  $('memberSummary').textContent=state.members.map(m=>`${m.sid} ${m.name}`).join(' · ');
-  $('headerStatus').textContent=state.code;
-  if(state.started) startWalk(true);
-}
-
-function teamText(){
-  return `[파피루스 망원 책방 탐방]\n우리 모둠 코드: ${state.code}\n모둠원: ${state.members.map(m=>`${m.sid} ${m.name}`).join(', ')}\n\n📌 이 코드를 모둠 카톡방에 보관하세요. 대표 학생은 같은 휴대폰으로 활동을 이어갑니다.`;
-}
-
-async function shareTeamCode(){
-  if(!state) return;
-  const text=teamText();
-  try{
-    if(navigator.share) await navigator.share({title:'파피루스 모둠 코드',text});
-    else { await navigator.clipboard.writeText(text); toast('카톡에 붙여넣을 문구를 복사했어요.'); }
-  }catch(e){ if(e.name!=='AbortError') copyCode(); }
-}
-
-async function copyCode(){
-  if(!state) return;
-  try{ await navigator.clipboard.writeText(teamText()); toast('모둠 코드와 명단을 복사했어요.'); }
-  catch(e){ toast('코드: '+state.code); }
-}
-function syncSharedCheck(v){
-  $('sharedCheck').checked=v; $('modalContinueBtn').disabled=!v; toggleStartButton();
-}
-function toggleStartButton(){
-  const v=$('sharedCheck').checked; $('startWalkBtn').disabled=!v;
-  $('modalSharedCheck').checked=v; $('modalContinueBtn').disabled=!v;
-}
-function closeCodeModal(){ $('codeModal').classList.add('hidden'); }
-function startWalk(fromRestore=false){
-  if(!fromRestore && !$('sharedCheck').checked) return toast('먼저 모둠 코드를 카톡방에 보내주세요.');
-  state.started=true; saveState();
-  $('teamCard').classList.add('hidden');
-  $('walkCard').classList.remove('hidden');
-  $('logCard').classList.remove('hidden');
-  $('codeModal').classList.add('hidden');
-  renderWalk();
-}
-
-function renderWalk(){
-  if(!state) return;
-  const n=state.visits.length;
-  $('roundBadge').textContent=`${n} / 3`;
-  for(let i=1;i<=3;i++) $('step'+i).classList.toggle('done',i<=n);
-  renderLog();
-  if(n>=3){
-    $('walkCard').classList.add('hidden');
-    $('completeCard').classList.remove('hidden');
-    $('headerStatus').textContent='COMPLETE';
-    return;
-  }
-  $('roundTitle').textContent=`${n+1}차 책방 인증`;
-  $('photoTitle').textContent=`${n+1}차 인증사진 1장`;
-  selectedShop=null; pendingPhotoBlob=null;
-  $('photoInput').value=''; $('photoPreview').src=''; $('photoPreview').classList.add('hidden'); $('photoBox').classList.add('hidden');
-  renderShops();
-  renderRecommendations();
-}
-
-function renderRecommendations(){
-  const box=$('recommendBox'), list=$('recommendList'); list.innerHTML='';
-  if(!state.visits.length){ box.classList.add('hidden'); return; }
-  const last=shopById(state.visits[state.visits.length-1].shopId);
-  const visited=new Set(state.visits.map(v=>v.shopId));
-  let ids=last.near.filter(id=>!visited.has(id));
-  if(ids.length<3) ids=ids.concat(SHOPS.map(s=>s.id).filter(id=>id!==last.id&&!visited.has(id)&&!ids.includes(id))).slice(0,3);
-  ids.forEach(id=>{
-    const s=shopById(id); const b=document.createElement('button'); b.className='chip'; b.type='button';
-    b.textContent=s.name; b.onclick=()=>chooseShop(id); list.appendChild(b);
-  });
-  box.classList.remove('hidden');
-}
-
-function renderShops(){
-  const grid=$('shopGrid'); grid.innerHTML='';
-  const visited=new Set(state.visits.map(v=>v.shopId));
-  SHOPS.filter(s=>!visited.has(s.id)).forEach(s=>{
-    const el=document.createElement('div'); el.className='shop'; el.id='shop-'+s.id;
-    el.innerHTML=`<div class="shophead"><div><div class="shopname">${s.name}</div><div class="addr">${s.addr}</div></div><a class="map" href="${mapUrl(s.name)}" target="_blank" rel="noopener">지도 보기 ↗</a></div>
-      <button type="button" class="btn secondary" style="margin-top:10px" onclick="chooseShop('${s.id}')">이번 책방으로 선택</button>`;
-    grid.appendChild(el);
-  });
-}
-function chooseShop(id){
-  selectedShop=id;
-  document.querySelectorAll('.shop').forEach(x=>x.classList.remove('selected'));
-  const el=$('shop-'+id); if(el) el.classList.add('selected');
-  $('photoBox').classList.remove('hidden');
-  $('photoBox').scrollIntoView({behavior:'smooth',block:'center'});
-}
-
-$('photoInput').addEventListener('change', async e=>{
-  const file=e.target.files[0]; if(!file) return;
-  pendingPhotoBlob=await compressImage(file);
-  $('photoPreview').src=URL.createObjectURL(pendingPhotoBlob);
-  $('photoPreview').classList.remove('hidden');
-});
-
-function compressImage(file){
-  return new Promise((resolve,reject)=>{
-    const img=new Image(), url=URL.createObjectURL(file);
-    img.onload=()=>{
-      let w=img.width,h=img.height,max=1400;
-      if(Math.max(w,h)>max){ const r=max/Math.max(w,h); w=Math.round(w*r); h=Math.round(h*r); }
-      const c=document.createElement('canvas'); c.width=w;c.height=h;
-      c.getContext('2d').drawImage(img,0,0,w,h);
-      c.toBlob(blob=>{URL.revokeObjectURL(url); blob?resolve(blob):reject(new Error('압축 실패'));},'image/jpeg',.82);
-    };
-    img.onerror=reject; img.src=url;
-  });
-}
-
-function openDb(){
-  return new Promise((resolve,reject)=>{
-    const req=indexedDB.open('papyrus_mangwon_photos',1);
-    req.onupgradeneeded=()=>{ if(!req.result.objectStoreNames.contains('photos')) req.result.createObjectStore('photos'); };
-    req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error);
-  });
-}
-async function putPhoto(key,blob){
-  const db=await openDb(); return new Promise((resolve,reject)=>{
-    const tx=db.transaction('photos','readwrite'); tx.objectStore('photos').put(blob,key);
-    tx.oncomplete=()=>resolve(); tx.onerror=()=>reject(tx.error);
-  });
-}
-async function getPhoto(key){
-  const db=await openDb(); return new Promise((resolve,reject)=>{
-    const req=db.transaction('photos','readonly').objectStore('photos').get(key);
-    req.onsuccess=()=>resolve(req.result||null); req.onerror=()=>reject(req.error);
-  });
-}
-async function clearPhotos(){
-  const db=await openDb(); return new Promise((resolve,reject)=>{
-    const tx=db.transaction('photos','readwrite'); tx.objectStore('photos').clear();
-    tx.oncomplete=resolve; tx.onerror=()=>reject(tx.error);
-  });
-}
-
-async function saveVisit(){
-  if(!selectedShop) return toast('이번 책방을 먼저 선택하세요.');
-  if(!pendingPhotoBlob) return toast('인증사진 1장을 선택하세요.');
-  const round=state.visits.length+1;
-  const key=`${state.code}-visit-${round}`;
-  try{
-    await putPhoto(key,pendingPhotoBlob);
-    state.visits.push({shopId:selectedShop,photoKey:key,time:new Date().toISOString()});
-    saveState(); toast(`${round}차 인증 완료!`);
-    renderWalk();
-  }catch(e){ toast('사진 저장에 실패했어요. 다시 시도하세요.'); }
-}
-
-function renderLog(){
-  const log=$('visitLog'); log.innerHTML='';
-  state.visits.forEach((v,i)=>{
-    const s=shopById(v.shopId); const d=document.createElement('div'); d.className='visititem';
-    d.innerHTML=`<b>${i+1}차</b> ${s.name} <span class="small">· 인증사진 저장 완료</span>`;
-    log.appendChild(d);
-  });
-  if(!state.visits.length) log.innerHTML='<div class="visititem small">아직 인증한 책방이 없습니다.</div>';
-}
-
-function finalText(){
-  return `[파피루스 망원 책방 탐방 완료]\n팀 코드: ${state.code}\n모둠원: ${state.members.map(m=>`${m.sid} ${m.name}`).join(', ')}\n\n` +
-    state.visits.map((v,i)=>`${i+1}차: ${shopById(v.shopId).name}`).join('\n') +
-    `\n\n인증사진 3장을 함께 제출합니다.`;
-}
-async function shareFinal(){
-  try{
-    const files=[];
-    for(let i=0;i<state.visits.length;i++){
-      const v=state.visits[i], blob=await getPhoto(v.photoKey);
-      if(blob) files.push(new File([blob],`${i+1}차_${shopById(v.shopId).name}.jpg`,{type:'image/jpeg'}));
-    }
-    const data={title:'파피루스 망원 책방 탐방 제출',text:finalText(),files};
-    if(files.length===3 && navigator.canShare && navigator.canShare({files}) && navigator.share){
-      await navigator.share(data);
-    } else if(navigator.share){
-      await navigator.share({title:data.title,text:data.text});
-      toast('사진 첨부가 지원되지 않으면 갤러리의 인증사진도 함께 보내주세요.');
-    } else {
-      await navigator.clipboard.writeText(data.text); toast('제출 문구를 복사했어요.');
-    }
-  }catch(e){ if(e.name!=='AbortError') toast('공유가 안 되면 제출 문구 복사를 이용하세요.'); }
-}
-async function copyFinalSummary(){
-  try{ await navigator.clipboard.writeText(finalText()); toast('최종 제출 문구를 복사했어요.'); }catch(e){}
-}
-
-function resumeByCode(){
-  const code=$('resumeCode').value.trim().toUpperCase();
-  if(!state){ return toast('이 휴대폰에 저장된 모둠 기록이 없어요. 새 모둠을 만들어 주세요.'); }
-  if(code!==state.code) return toast('이 휴대폰에 저장된 모둠 코드와 달라요.');
-  renderTeam(); toast('저장된 탐방 기록을 불러왔어요.');
-}
-
-async function resetAll(){
-  if(!confirm('이 휴대폰에 저장된 모둠 정보와 인증사진을 모두 지울까요?')) return;
-  localStorage.removeItem(STATE_KEY);
-  try{ await clearPhotos(); }catch(e){}
-  location.reload();
-}
-
-function renderAllShops(){
-  $('allShops').innerHTML=SHOPS.map(s=>`<div class="visititem"><b>${s.name}</b><br><span class="small">${s.addr} · <a class="map" href="${mapUrl(s.name)}" target="_blank" rel="noopener">네이버지도</a></span></div>`).join('');
-}
-renderAllShops();
-
-if(state){
-  $('setupCard').classList.add('hidden');
-  renderTeam();
-  if(!state.started){
-    $('sharedCheck').checked=true; toggleStartButton();
-  }
-}
+document.querySelectorAll('#sizeChoice button').forEach(b=>b.onclick=()=>setTeamSize(Number(b.dataset.size)));
+function setTeamSize(n){teamSize=n;document.querySelectorAll('#sizeChoice button').forEach(b=>b.classList.toggle('on',Number(b.dataset.size)===n));$('memberInputs').innerHTML='';for(let i=1;i<=n;i++){const r=document.createElement('div');r.className='member';r.innerHTML=`<input id="sid${i}" placeholder="${i}번 학번" inputmode="numeric"><input id="sname${i}" placeholder="${i}번 이름">`;$('memberInputs').appendChild(r)}$('memberArea').classList.remove('hidden')}
+function makeCode(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',a=new Uint32Array(4);crypto.getRandomValues(a);let o='PAP-';for(let i=0;i<4;i++)o+=chars[a[i]%chars.length];return o}
+async function createTeam(){if(!ensureApi())return toast('선생님 Drive 연결 후 시작할 수 있어요.');if(!teamSize)return toast('모둠 인원을 먼저 선택하세요.');const members=[];for(let i=1;i<=teamSize;i++){const sid=$('sid'+i).value.trim(),name=$('sname'+i).value.trim();if(!sid||!name)return toast(`${i}번 모둠원의 학번과 이름을 입력하세요.`);members.push({sid,name})}const btn=$('createTeamBtn');btn.disabled=true;btn.textContent='모둠 등록 중…';const temp={code:makeCode(),members,visits:[],createdAt:new Date().toISOString(),started:false};try{await postNoCors({action:'createTeam',teamCode:temp.code,members});const d=await waitForProgress(temp.code,0,8);if(!d.ok)throw new Error(d.error||'모둠 등록을 확인하지 못했어요.');state=temp;saveState();renderTeam();$('modalCode').textContent=state.code;$('codeModal').classList.remove('hidden')}catch(e){toast(e.message||'모둠 등록에 실패했어요.')}finally{btn.disabled=false;btn.textContent='모둠 코드 만들기'}}
+async function waitForProgress(code,minProgress,tries=10,shopName=''){let last={ok:false};for(let i=0;i<tries;i++){await new Promise(r=>setTimeout(r,i?900:500));try{last=await jsonp({action:'progress',teamCode:code});if(last.ok&&Number(last.progress)>=minProgress&&(!shopName||(last.visits||[]).some(v=>Number(v.round)===minProgress&&v.shop===shopName)))return last}catch(e){}}return last}
+function renderTeam(){if(!state)return;$('setupCard').classList.add('hidden');$('teamCard').classList.remove('hidden');$('teamCodeText').textContent=state.code;$('memberSummary').textContent=state.members&&state.members.length?state.members.map(m=>`${m.sid} ${m.name}`).join(' · '):'서버에서 이어온 모둠';$('headerStatus').textContent=state.code;if(state.started)startWalk(true)}
+function teamText(){return `[파피루스 망원 책방 탐방]\n우리 모둠 코드: ${state.code}\n${state.members&&state.members.length?'모둠원: '+state.members.map(m=>`${m.sid} ${m.name}`).join(', ')+'\n':''}\n📌 이 코드를 모둠 카톡방에 보관하세요. 다른 휴대폰에서도 이어갈 수 있습니다.`}
+async function shareTeamCode(){if(!state)return;const text=teamText();try{if(navigator.share)await navigator.share({title:'파피루스 모둠 코드',text});else{await navigator.clipboard.writeText(text);toast('카톡에 붙여넣을 내용을 복사했어요.')}}catch(e){if(e.name!=='AbortError')copyCode()}}
+async function copyCode(){try{await navigator.clipboard.writeText(teamText());toast('모둠 코드와 명단을 복사했어요.')}catch(e){toast('코드: '+state.code)}}
+function syncSharedCheck(v){$('sharedCheck').checked=v;$('modalContinueBtn').disabled=!v;toggleStartButton()}function toggleStartButton(){const v=$('sharedCheck').checked;$('startWalkBtn').disabled=!v;$('modalSharedCheck').checked=v;$('modalContinueBtn').disabled=!v}function closeCodeModal(){$('codeModal').classList.add('hidden')}
+function startWalk(fromRestore=false){if(!fromRestore&&!$('sharedCheck').checked)return toast('먼저 모둠 코드를 카톡방에 보내주세요.');state.started=true;saveState();$('teamCard').classList.add('hidden');$('walkCard').classList.remove('hidden');$('logCard').classList.remove('hidden');$('codeModal').classList.add('hidden');renderWalk()}
+function renderWalk(){const n=state.visits.length;$('roundBadge').textContent=`${n} / 3`;for(let i=1;i<=3;i++)$('step'+i).classList.toggle('done',i<=n);renderLog();if(n>=3){$('walkCard').classList.add('hidden');$('completeCard').classList.remove('hidden');$('headerStatus').textContent='COMPLETE';return}$('completeCard').classList.add('hidden');$('roundTitle').textContent=`${n+1}차 책방 인증`;$('photoTitle').textContent=`${n+1}차 인증사진 1장`;selectedShop=null;pendingPhotoData='';$('photoInput').value='';$('photoPreview').src='';$('photoPreview').classList.add('hidden');$('photoBox').classList.add('hidden');$('uploadNote').textContent='';renderShops();renderRecommendations()}
+function renderRecommendations(){const box=$('recommendBox'),list=$('recommendList');list.innerHTML='';if(!state.visits.length){box.classList.add('hidden');return}const last=shopById(state.visits[state.visits.length-1].shopId),visited=new Set(state.visits.map(v=>v.shopId));let ids=last.near.filter(id=>!visited.has(id));if(ids.length<3)ids=ids.concat(SHOPS.map(s=>s.id).filter(id=>id!==last.id&&!visited.has(id)&&!ids.includes(id))).slice(0,3);ids.forEach(id=>{const s=shopById(id),b=document.createElement('button');b.className='chip';b.type='button';b.textContent=s.name;b.onclick=()=>chooseShop(id);list.appendChild(b)});box.classList.remove('hidden')}
+function renderShops(){const grid=$('shopGrid');grid.innerHTML='';const visited=new Set(state.visits.map(v=>v.shopId));SHOPS.filter(s=>!visited.has(s.id)).forEach(s=>{const e=document.createElement('div');e.className='shop';e.id='shop-'+s.id;e.innerHTML=`<div class="shophead"><div><div class="shopname">${s.name}</div><div class="addr">${s.addr}</div></div><a class="map" href="${mapUrl(s.name)}" target="_blank" rel="noopener">지도 보기 ↗</a></div><button type="button" class="btn secondary" style="margin-top:10px" onclick="chooseShop('${s.id}')">이번 책방으로 선택</button>`;grid.appendChild(e)})}
+function chooseShop(id){selectedShop=id;document.querySelectorAll('.shop').forEach(x=>x.classList.remove('selected'));const e=$('shop-'+id);if(e)e.classList.add('selected');$('photoBox').classList.remove('hidden');$('photoBox').scrollIntoView({block:'center'})}
+$('photoInput').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{pendingPhotoData=await compressToDataUrl(f);$('photoPreview').src=pendingPhotoData;$('photoPreview').classList.remove('hidden');$('uploadNote').textContent='사진 준비 완료 · 제출 버튼을 눌러주세요.'}catch(err){pendingPhotoData='';toast('사진을 읽지 못했어요. 다른 사진을 선택하세요.')}});
+function compressToDataUrl(file){return new Promise((resolve,reject)=>{const img=new Image(),url=URL.createObjectURL(file);img.onload=()=>{let w=img.width,h=img.height,max=1100;if(Math.max(w,h)>max){const r=max/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r)}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);URL.revokeObjectURL(url);let q=.76,data=c.toDataURL('image/jpeg',q);while(data.length>900000&&q>.46){q-=.1;data=c.toDataURL('image/jpeg',q)}resolve(data)};img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('image error'))};img.src=url})}
+async function saveVisit(){if(!selectedShop)return toast('이번 책방을 먼저 선택하세요.');if(!pendingPhotoData)return toast('인증사진 1장을 선택하세요.');if(!ensureApi())return;const round=state.visits.length+1,shop=shopById(selectedShop),btn=$('submitVisitBtn');btn.disabled=true;btn.textContent='Drive에 업로드 중…';$('uploadNote').textContent='창을 닫지 마세요. 저장 여부를 확인하고 있어요.';try{await postNoCors({action:'visit',teamCode:state.code,round,shopName:shop.name,photoData:pendingPhotoData});const d=await waitForProgress(state.code,round,12,shop.name);if(!d.ok||Number(d.progress)<round)throw new Error('Drive 저장 확인이 되지 않았어요. 다시 눌러주세요.');state.visits=(d.visits||[]).map(v=>{const s=shopByName(v.shop);return{shopId:s?s.id:'',shopName:v.shop,time:v.submittedAt}});saveState();toast(`${round}차 Drive 제출 완료!`);renderWalk()}catch(e){$('uploadNote').textContent='저장 확인 실패 · 인터넷 연결을 확인하고 다시 제출하세요.';toast(e.message||'제출에 실패했어요.')}finally{btn.disabled=false;btn.textContent='Drive에 인증 제출'}}
+function renderLog(){const log=$('visitLog');log.innerHTML='';state.visits.forEach((v,i)=>{const s=shopById(v.shopId);const d=document.createElement('div');d.className='visititem';d.innerHTML=`<b>${i+1}차</b> ${s?s.name:v.shopName||''} <span class="small">· Drive 저장 완료</span>`;log.appendChild(d)});if(!state.visits.length)log.innerHTML='<div class="visititem small">아직 인증한 책방이 없습니다.</div>'}
+async function resumeByCode(){if(!ensureApi())return;const code=$('resumeCode').value.trim().toUpperCase();if(!/^PAP-[A-HJ-NP-Z2-9]{4}$/.test(code))return toast('모둠 코드를 확인하세요.');try{const d=await jsonp({action:'progress',teamCode:code});if(!d.ok)throw new Error(d.error||'모둠을 찾지 못했어요.');state={code,members:[],visits:(d.visits||[]).map(v=>{const s=shopByName(v.shop);return{shopId:s?s.id:'',shopName:v.shop,time:v.submittedAt}}),createdAt:'',started:true};saveState();$('setupCard').classList.add('hidden');$('walkCard').classList.remove('hidden');$('logCard').classList.remove('hidden');$('headerStatus').textContent=code;renderWalk();toast('서버의 탐방 기록을 불러왔어요.')}catch(e){toast(e.message||'기록을 불러오지 못했어요.')}}
+function summaryText(){return `[파피루스 망원 책방 탐방 완료]\n팀 코드: ${state.code}\n${state.members&&state.members.length?'모둠원: '+state.members.map(m=>`${m.sid} ${m.name}`).join(', ')+'\n':''}\n`+state.visits.map((v,i)=>`${i+1}차: ${(shopById(v.shopId)||{}).name||v.shopName}`).join('\n')+'\n\n인증사진은 선생님 Drive에 제출 완료.'}async function copySummary(){try{await navigator.clipboard.writeText(summaryText());toast('우리 팀 기록을 복사했어요.')}catch(e){}}
+function resetLocal(){if(!confirm('이 휴대폰의 기록만 지울까요? Drive에 제출된 내용은 삭제되지 않습니다.'))return;localStorage.removeItem(STATE_KEY);location.reload()}
+function renderAllShops(){$('allShops').innerHTML=SHOPS.map(s=>`<div class="visititem"><b>${s.name}</b><br><span class="small">${s.addr} · <a class="map" href="${mapUrl(s.name)}" target="_blank" rel="noopener">네이버지도</a></span></div>`).join('')}
+renderAllShops();pingServer();if(state){$('setupCard').classList.add('hidden');$('headerStatus').textContent=state.code;if(state.started){$('walkCard').classList.remove('hidden');$('logCard').classList.remove('hidden');renderWalk()}else{renderTeam();$('sharedCheck').checked=true;toggleStartButton()}}
 </script>
 </body>
 </html>
