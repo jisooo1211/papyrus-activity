@@ -1,587 +1,516 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>파피루스 모바일 활동지</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #fcfaf6; /* 따뜻한 미색 파피루스 톤 */
-            -webkit-tap-highlight-color: transparent;
-        }
-        /* 스크롤바 커스텀 */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #c2b59b;
-            border-radius: 3px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1f5f4a" />
+  <title>파피루스 | 망원 책방 탐방</title>
+  <style>
+    :root{
+      --bg:#f7f5ef; --paper:#fffdf8; --ink:#25312c; --muted:#6f7b75;
+      --green:#1f5f4a; --green2:#2f7a60; --mint:#dfeee7; --line:#dfe5df;
+      --yellow:#f4cf67; --danger:#b54d43; --shadow:0 10px 30px rgba(31,95,74,.09);
+      --r:20px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .wrap{width:min(100%,560px);margin:0 auto;padding:0 16px 48px}
+    .top{position:sticky;top:0;z-index:20;background:rgba(247,245,239,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(31,95,74,.08)}
+    .topin{width:min(100%,560px);margin:auto;padding:13px 16px;display:flex;justify-content:space-between;align-items:center}
+    .brand{font-weight:900;letter-spacing:-.03em}.brand small{font-weight:700;color:var(--green)}
+    .badge{font-size:12px;font-weight:800;color:var(--green);background:var(--mint);padding:7px 10px;border-radius:999px}
+    .hero{padding:24px 0 8px}
+    h1{font-size:30px;line-height:1.12;letter-spacing:-.045em;margin:0 0 10px}
+    h2{font-size:20px;letter-spacing:-.035em;margin:0}
+    h3{font-size:16px;margin:0}
+    p{margin:0}
+    .sub{color:var(--muted);font-size:14px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);margin-top:14px}
+    .card.flat{box-shadow:none}
+    .notice{background:#eef6f2;border-color:#c8ddd3}
+    .notice strong{color:var(--green)}
+    .section-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}
+    .num{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:50%;background:var(--green);color:white;font-weight:900;font-size:13px;margin-right:7px}
+    label{display:block;font-size:12px;font-weight:800;color:#56625c;margin:12px 0 6px}
+    input,select{width:100%;border:1px solid #ccd5cf;background:white;border-radius:14px;padding:12px 13px;color:var(--ink);outline:none}
+    input:focus,select:focus{border-color:var(--green2);box-shadow:0 0 0 3px rgba(47,122,96,.11)}
+    .choice{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .choice button{border:1px solid #cfd8d2;background:white;padding:11px 5px;border-radius:13px;font-weight:900;color:#66726c}
+    .choice button.on{background:var(--green);border-color:var(--green);color:white}
+    .members{display:grid;gap:10px;margin-top:8px}
+    .member{display:grid;grid-template-columns:92px 1fr;gap:8px}
+    .member input{margin:0}
+    .btn{width:100%;border:0;border-radius:15px;padding:14px 15px;font-weight:900;transition:.15s}
+    .btn:active{transform:scale(.985)}
+    .primary{background:var(--green);color:white}
+    .secondary{background:var(--mint);color:var(--green)}
+    .ghost{background:white;color:var(--green);border:1px solid #bfd2c8}
+    .danger{background:#f8ebe9;color:var(--danger)}
+    .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .hidden{display:none!important}
+    .codebox{text-align:center;padding:19px;border:2px dashed #89ae9c;border-radius:18px;background:#f2f8f5;margin-top:12px}
+    .code{font-size:28px;font-weight:950;letter-spacing:.08em;color:var(--green);margin:8px 0}
+    .urgent{font-size:15px;font-weight:900;color:#8c5a00;background:#fff3cb;border:1px solid #f0d57a;border-radius:14px;padding:11px 12px;margin-top:12px}
+    .checkline{display:flex;gap:9px;align-items:flex-start;margin-top:12px;font-size:13px;font-weight:700;color:#5f6b65}
+    .checkline input{width:18px;height:18px;margin:2px 0 0}
+    .progress{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+    .step{padding:10px 6px;border-radius:13px;text-align:center;background:#edf0ed;color:#87918c;font-size:12px;font-weight:900}
+    .step.done{background:var(--green);color:white}
+    .shopgrid{display:grid;gap:10px}
+    .shop{border:1px solid var(--line);border-radius:17px;padding:14px;background:#fff}
+    .shop.selected{border:2px solid var(--green);background:#f2f8f5}
+    .shophead{display:flex;justify-content:space-between;gap:10px}
+    .shopname{font-size:16px;font-weight:950;letter-spacing:-.025em}
+    .addr{font-size:12px;color:var(--muted);margin-top:3px}
+    .map{font-size:12px;font-weight:900;color:var(--green);text-decoration:none;white-space:nowrap}
+    .recommend{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+    .chip{background:#eef6f2;border:1px solid #c9ddd4;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;color:var(--green)}
+    .photo{margin-top:13px;border:1.5px dashed #b8c8bf;border-radius:16px;padding:14px;text-align:center;background:#fafcfb}
+    .photo input{padding:0;border:0;background:transparent}
+    .preview{width:100%;max-height:260px;object-fit:cover;border-radius:13px;margin-top:10px}
+    .visitlog{display:grid;gap:8px;margin-top:10px}
+    .visititem{padding:11px 12px;border-radius:13px;background:#f2f5f3;font-size:13px}
+    .visititem b{color:var(--green)}
+    .complete{background:#1f5f4a;color:white;border-color:#1f5f4a}
+    .complete .sub{color:#d8e9e1}
+    .footer{text-align:center;color:#89938e;font-size:11px;padding-top:24px}
+    .modal{position:fixed;inset:0;background:rgba(13,28,21,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding:16px}
+    .sheet{width:min(100%,560px);background:var(--paper);border-radius:24px 24px 18px 18px;padding:20px;box-shadow:0 -18px 60px rgba(0,0,0,.18)}
+    .sheet h2{font-size:22px}
+    .small{font-size:12px;color:var(--muted)}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;background:#22332b;color:white;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:.2s}
+    .toast.show{opacity:1}
+    .reset{margin-top:18px}
+    @media(min-width:520px){.wrap{padding-left:20px;padding-right:20px}.hero{padding-top:30px}}
+  </style>
 </head>
-<body class="text-stone-800 antialiased min-h-screen flex flex-col pb-12">
-
-    <!-- 상단 고정 네비게이션 바 -->
-    <header class="sticky top-0 z-30 bg-[#8b4513] text-white shadow-md px-4 py-3 flex items-center justify-between">
-        <div class="flex items-center space-x-2">
-            <i class="fa-solid fa-scroll text-yellow-300 text-xl"></i>
-            <span class="font-black tracking-wider text-lg">PAPYRUS MOBILE</span>
-        </div>
-        <div class="text-xs bg-[#5d2d0c] px-2.5 py-1 rounded-full font-medium border border-[#a0522d]/50">
-            야외 활동지
-        </div>
-    </header>
-
-    <!-- 메인 컨테이너 -->
-    <main class="flex-grow max-w-md w-full mx-auto px-4 pt-6 space-y-6">
-
-        <!-- 0. 공통 안내 카드 -->
-        <section class="bg-amber-50/70 border border-amber-200 rounded-2xl p-5 shadow-sm space-y-3">
-            <div class="flex items-center space-x-2 text-[#8b4513]">
-                <i class="fa-solid fa-circle-info text-lg"></i>
-                <h2 class="font-bold text-base">공통 안내 & 오늘의 목표</h2>
-            </div>
-            <div class="text-xs text-stone-600 space-y-1.5 font-medium leading-relaxed">
-                <p class="flex items-start"><span class="text-[#8b4513] mr-1.5">📍</span><strong>장소:</strong> 서울광장 야외도서관 → 서울시립미술관</p>
-                <p class="flex items-start"><span class="text-[#8b4513] mr-1.5">🎯</span><strong>목표:</strong> 경험(감상) ➔ 기록 ➔ 도서부 활동으로 확장!</p>
-                <p class="flex items-start"><span class="text-[#8b4513] mr-1.5">💡</span><strong>Tip:</strong> 작성 중 뒤로 가거나 폰이 꺼져도 작성 데이터는 브라우저에 임시 저장됩니다.</p>
-            </div>
-        </section>
-
-        <!-- 1. 기본 정보 입력 -->
-        <section class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200/60 space-y-4">
-            <h3 class="font-bold text-stone-700 text-sm flex items-center gap-1.5">
-                <i class="fa-solid fa-user-pen text-amber-600"></i> 기본 인적사항
-            </h3>
-            <div class="grid grid-cols-2 gap-3">
-                <div>
-                    <label class="block text-xs font-bold text-stone-500 mb-1">학년 반 번호</label>
-                    <input type="text" id="student-id" placeholder="예: 2-3-15" class="w-full text-sm px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-medium">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-stone-500 mb-1">이름</label>
-                    <input type="text" id="student-name" placeholder="홍길동" class="w-full text-sm px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all font-medium">
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. 부서 선택 탭 -->
-        <section class="space-y-3">
-            <h3 class="font-bold text-stone-700 text-sm px-1 flex items-center gap-1.5">
-                <i class="fa-solid fa-users text-amber-600"></i> 본인의 부서를 선택하세요
-            </h3>
-            <div class="grid grid-cols-3 gap-2">
-                <button onclick="selectDepartment('insta')" id="tab-insta" class="dept-tab py-3.5 px-2 bg-white border border-stone-200 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-all shadow-sm">
-                    <i class="fa-brands fa-instagram text-xl text-stone-400 dept-icon"></i>
-                    <span class="text-xs font-bold text-stone-600 dept-text">인스타 운영</span>
-                </button>
-                <button onclick="selectDepartment('plan')" id="tab-plan" class="dept-tab py-3.5 px-2 bg-white border border-stone-200 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-all shadow-sm">
-                    <i class="fa-solid fa-wand-magic-sparkles text-xl text-stone-400 dept-icon"></i>
-                    <span class="text-xs font-bold text-stone-600 dept-text">프로그램 기획</span>
-                </button>
-                <button onclick="selectDepartment('pr')" id="tab-pr" class="dept-tab py-3.5 px-2 bg-white border border-stone-200 rounded-2xl flex flex-col items-center justify-center gap-1.5 transition-all shadow-sm">
-                    <i class="fa-solid fa-bullhorn text-xl text-stone-400 dept-icon"></i>
-                    <span class="text-xs font-bold text-stone-600 dept-text">홍보부</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- 3. 활동지 본문 영역 (부서 선택 전에는 가려짐) -->
-        <div id="welcome-message" class="bg-amber-50/40 rounded-2xl p-8 border border-dashed border-stone-300 text-center space-y-2">
-            <i class="fa-solid fa-arrow-pointer text-amber-700 text-2xl animate-bounce"></i>
-            <p class="font-bold text-stone-600 text-sm">위에서 부서를 선택하면 활동지가 열립니다!</p>
-        </div>
-
-        <!-- ==================== [인스타 운영부 활동지] ==================== -->
-        <div id="content-insta" class="dept-content hidden space-y-5">
-            <!-- 안내 및 역할 분담 -->
-            <div class="bg-amber-900 text-white rounded-2xl p-4 shadow-sm space-y-2">
-                <div class="flex items-center space-x-2">
-                    <i class="fa-brands fa-instagram text-lg"></i>
-                    <span class="font-black text-sm">인스타 운영부 (5명) 활동 가이드</span>
-                </div>
-                <p class="text-xs text-amber-100 leading-relaxed font-light">👉 핵심: <strong>"콘텐츠 제작자 관점"</strong>으로 현장 살펴보기</p>
-                <div class="bg-[#5d2d0c]/40 rounded-xl p-2.5 text-[11px] space-y-1 text-amber-200">
-                    <p class="font-bold">🎬 추천 역할 분담</p>
-                    <p>• 촬영 담당 (2명) / 아이디어 및 콘셉트 (2명) / 전체 기록 및 편집 방향 정리 (1명)</p>
-                </div>
-            </div>
-
-            <!-- 야외도서관 미션 -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200/60 space-y-4">
-                <h4 class="font-black text-amber-900 text-sm border-b pb-2 flex items-center gap-1.5">
-                    <span class="bg-amber-100 text-amber-950 px-2 py-0.5 rounded text-[11px]">미션 1</span> 서울광장 야외도서관
-                </h4>
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q1. 광장의 사람들이 가장 많이 하는 행동 3가지는?</label>
-                        <textarea id="insta-q1" placeholder="예: 빈백에 누워 자는 사람, 사진 촬영하는 사람, 아이와 놀아주는 모습" class="w-full text-xs p-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 h-20 leading-relaxed"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q2. 이 야외 도서관 공간이 매력적인 핵심 이유는?</label>
-                        <input type="text" id="insta-q2" placeholder="답변을 입력해 주세요" class="w-full text-xs px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q3. 이곳에서 릴스를 기획한다면? (콘셉트 1개)</label>
-                        <input type="text" id="insta-q3" placeholder="예: 서울 한복판에서 즐기는 감성 북 피크닉 브이로그" class="w-full text-xs px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 미술관 미션 -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200/60 space-y-4">
-                <h4 class="font-black text-amber-900 text-sm border-b pb-2 flex items-center gap-1.5">
-                    <span class="bg-amber-100 text-amber-950 px-2 py-0.5 rounded text-[11px]">미션 2</span> 서울시립미술관
-                </h4>
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q4. 가장 인상적이었던 전시(작품) 1개와 이유는?</label>
-                        <textarea id="insta-q4" placeholder="작품 이름과 마음을 끌었던 포인트를 적어주세요." class="w-full text-xs p-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 h-20 leading-relaxed"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q5. 이 전시를 '도서 추천 콘텐츠'로 바꾼다면 어떻게 연결할까?</label>
-                        <input type="text" id="insta-q5" placeholder="예: 전시의 쓸쓸한 감성 ➔ 고독을 다룬 시집 소개" class="w-full text-xs px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 변경된 미션 3: 다음 회의 시간 기획 안내 메시지 -->
-            <div class="bg-amber-50 border border-amber-300 rounded-2xl p-5 shadow-sm space-y-3">
-                <h4 class="font-bold text-amber-900 text-sm flex items-center gap-1.5">
-                    <i class="fa-solid fa-compass-drafting text-amber-700"></i> 🎬 미션 3 안내
-                </h4>
-                <div class="p-4 bg-white border border-amber-200 rounded-xl text-xs text-stone-600 leading-relaxed space-y-2">
-                    <p class="font-bold text-[#8b4513] text-sm">릴스 기획안 작성은 다음 회의 때!</p>
-                    <p>현장 활동이 끝나면 야외에서 바로 해산하므로, <span class="font-semibold text-stone-800">최종 릴스 스토리보드 기획은 이번에 찍은 멋진 숏폼 소스들을 바탕으로 다음 동아리 회의 시간에 다 함께 작성</span>합니다.</p>
-                    <p class="bg-amber-50 p-2 rounded-lg text-[11px] text-amber-800 font-medium">✨ 야외 활동 중에는 스마트폰 카메라에 예쁜 영상 컷과 사람들의 열띤 야외 독서 분위기를 듬뿍 촬영하고 담아오는 데 집중해 주세요!</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== [프로그램 기획부 활동지] ==================== -->
-        <div id="content-plan" class="dept-content hidden space-y-5">
-            <div class="bg-[#5d4037] text-white rounded-2xl p-4 shadow-sm space-y-2">
-                <div class="flex items-center space-x-2">
-                    <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
-                    <span class="font-black text-sm">프로그램 기획부 (6명) 활동 가이드</span>
-                </div>
-                <p class="text-xs text-amber-100 leading-relaxed font-light">👉 핵심: <strong>"기획자의 시선"</strong>으로 공간 분석 ➔ 학교 접목 방안 찾기</p>
-                <div class="grid grid-cols-2 gap-2 mt-2">
-                    <button onclick="togglePlanTeam('A')" id="btn-team-a" class="py-2 rounded-xl text-xs font-bold transition-all border border-amber-400 bg-amber-500 text-white">
-                        🅰️ A팀 (야외도서관 중심)
-                    </button>
-                    <button onclick="togglePlanTeam('B')" id="btn-team-b" class="py-2 rounded-xl text-xs font-bold transition-all border border-stone-600 bg-[#402e29] text-stone-300">
-                        🅱️ B팀 (미술관 중심)
-                    </button>
-                </div>
-            </div>
-
-            <!-- A팀 활동지 -->
-            <div id="plan-team-a-section" class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200/60 space-y-4">
-                <h4 class="font-black text-stone-700 text-sm border-b pb-2 flex items-center gap-1.5">
-                    <span class="bg-amber-100 text-amber-950 px-2 py-0.5 rounded text-[11px]">A팀 미션</span> 서울광장 야외도서관 중심 분석
-                </h4>
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q1. 이 야외도서관에서 발견한 특별한 매력/좋은 점 3가지는?</label>
-                        <textarea id="plan-a-q1" placeholder="예: 푹신한 빈백과 그늘막, 누구나 자유롭게 꺼내 읽는 열린 서가" class="w-full text-xs p-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 h-20 leading-relaxed"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q2. 야외 공간인데도 사람들이 오래 머물게 만드는 핵심 요소는?</label>
-                        <input type="text" id="plan-a-q2" placeholder="예: 잔잔히 흐르는 야외 음악, 쾌적하게 쉴 수 있는 편의 장비들" class="w-full text-xs px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q3. 우리 학교 도서관에 당장 적용해 볼 수 있는 아이디어는?</label>
-                        <input type="text" id="plan-a-q3" placeholder="예: 학교 화단 근처 잔디밭에 돗자리 깔아주는 점심 야외 독서존 운영" class="w-full text-xs px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- B팀 활동지 -->
-            <div id="plan-team-b-section" class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200/60 space-y-4 hidden">
-                <h4 class="font-black text-stone-700 text-sm border-b pb-2 flex items-center gap-1.5">
-                    <span class="bg-stone-200 text-stone-900 px-2 py-0.5 rounded text-[11px]">B팀 미션</span> 서울시립미술관 중심 기획
-                </h4>
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q1. 가장 기억에 남는 전시 (공간, 작가 또는 작품 특징)?</label>
-                        <textarea id="plan-b-q1" placeholder="느낀 감정이나 시각적으로 인상적이었던 점을 편하게 적으세요." class="w-full text-xs p-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 h-20 leading-relaxed"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q2. 이 전시 주제와 연결하여 학교에서 진행할 "독서 프로그램" 아이디어는?</label>
-                        <textarea id="plan-b-q2" placeholder="예: 전시의 키워드를 테마로 한 '책 추천 코너 운영' + 방과 후 한 줄 독서 토론" class="w-full text-xs p-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 h-20 leading-relaxed"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 변경된 최종 기획 안내 메시지 (기존 공통 최종 기획 대체) -->
-            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm space-y-3">
-                <h4 class="font-bold text-[#8b4513] text-sm flex items-center gap-1.5">
-                    <i class="fa-solid fa-flag-checkered text-amber-700"></i> 🎯 최종 기획 미션 안내
-                </h4>
-                <div class="p-4 bg-white border border-amber-200 rounded-xl text-xs text-stone-600 leading-relaxed space-y-2">
-                    <p class="font-bold text-[#8b4513] text-sm">도서부 프로그램 기획은 다음 회의 때!</p>
-                    <p>현장 활동이 끝나면 야외에서 바로 해산하므로, <span class="font-semibold text-stone-800">최종 프로그램 기획서 작성은 오늘 기록한 소중한 경험과 아이디어를 바탕으로 다음 동아리 회의 시간에 함께 진행</span>할 예정입니다.</p>
-                    <p class="bg-amber-50 p-2 rounded-lg text-[11px] text-amber-800 font-medium">✨ 야외 활동 중에는 서울광장 야외도서관과 미술관의 멋진 공간 기획, 운영 방식, 사람들의 소통 모습을 메모장 앱에 꼼꼼하게 메모해 주세요!</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== [홍보부 활동지] ==================== -->
-        <div id="content-pr" class="dept-content hidden space-y-5">
-            <!-- 안내 및 역할 분담 -->
-            <div class="bg-red-800 text-white rounded-2xl p-4 shadow-sm space-y-2">
-                <div class="flex items-center space-x-2">
-                    <i class="fa-solid fa-bullhorn text-lg"></i>
-                    <span class="font-black text-sm">홍보부 (6명) 활동 가이드</span>
-                </div>
-                <p class="text-xs text-amber-100 leading-relaxed font-light">👉 핵심: <strong>"사람들을 사로잡는 문구와 디자인"</strong> 분석 및 발견하기</p>
-                <div class="bg-red-950/40 rounded-xl p-2.5 text-[11px] space-y-1 text-red-200">
-                    <p class="font-bold">🎯 추천 역할 분담</p>
-                    <p>• 현장 홍보 방식 관찰팀 (3명) / 문구 및 디자인 기획팀 (3명)</p>
-                </div>
-            </div>
-
-            <!-- 서울광장 미션 -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200/60 space-y-4">
-                <h4 class="font-black text-red-900 text-sm border-b pb-2 flex items-center gap-1.5">
-                    <span class="bg-red-100 text-red-950 px-2 py-0.5 rounded text-[11px]">미션 1</span> 서울광장 야외도서관 홍보 포인트
-                </h4>
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q1. 광장에서 시각적으로 가장 눈에 띄는 요소는? (색감, 가구 배치 등)</label>
-                        <textarea id="pr-q1" placeholder="예: 초록 잔디와 대비되는 화사한 주황색 돗자리, 파스텔 톤 가구들" class="w-full text-xs p-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 h-20 leading-relaxed"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q2. 사람들이 호기심을 갖고 '직접 참여하도록 만드는 장치'는?</label>
-                        <input type="text" id="pr-q2" placeholder="예: 캐릭터 배너나 누구나 자유롭게 써볼 수 있는 모자 무료 대여" class="w-full text-xs px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 미술관 미션 -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-stone-200/60 space-y-4">
-                <h4 class="font-black text-red-900 text-sm border-b pb-2 flex items-center gap-1.5">
-                    <span class="bg-red-100 text-red-950 px-2 py-0.5 rounded text-[11px]">미션 2</span> 서울시립미술관 기획 요소
-                </h4>
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q3. 인상적이었던 미술관 내 홍보 방식은? (포스터, 팜플렛, 전시장 입구 등)</label>
-                        <textarea id="pr-q3" placeholder="예: 시선을 사로잡는 대형 벽면 그래픽 타이포그래피, 군더더기 없는 도록 리플렛" class="w-full text-xs p-3 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 h-20 leading-relaxed"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-stone-500 mb-1">Q4. 우리 도서부 프로그램 홍보에 벤치마킹하고 싶은 점은?</label>
-                        <input type="text" id="pr-q4" placeholder="예: 타이틀 글씨 크기를 크게 하고, 단색 배경을 활용하여 폰트 가독성 높이기" class="w-full text-xs px-3 py-2.5 bg-stone-50 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 변경된 미션 3 안내 메시지 (기존 우리 도서관 홍보 제작 대체) -->
-            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 shadow-sm space-y-3">
-                <h4 class="font-bold text-[#8b4513] text-sm flex items-center gap-1.5">
-                    <i class="fa-solid fa-paint-brush text-amber-700"></i> 📢 미션 3 안내
-                </h4>
-                <div class="p-4 bg-white border border-amber-200 rounded-xl text-xs text-stone-600 leading-relaxed space-y-2">
-                    <p class="font-bold text-[#8b4513] text-sm">프로그램 홍보 기획은 다음 회의 때!</p>
-                    <p>현장 활동이 끝나면 야외에서 바로 해산하므로, <span class="font-semibold text-stone-800">새로운 프로그램의 포스터 시각 구성안과 강렬한 홍보 카피 기획은 다음 동아리 회의 시간에 함께 진행</span>합니다.</p>
-                    <p class="bg-amber-50 p-2 rounded-lg text-[11px] text-amber-800 font-medium">✨ 야외 활동 중에는 수많은 사람들이 모이는 서울광장과 미술관에서 그들의 눈을 사로잡았던 훌륭한 레퍼런스들을 사진과 메모로 알차게 수집해 주세요!</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. 결과 제출 및 백업 영역 (부서 선택 후 노출) -->
-        <div id="submission-section" class="hidden space-y-4">
-            <div class="bg-[#2e1c0c] text-amber-100 rounded-2xl p-5 shadow-md space-y-4">
-                <h4 class="font-bold text-sm text-yellow-300 flex items-center gap-1.5">
-                    <i class="fa-regular fa-paper-plane"></i> 작성을 완료했나요? 아래 순서대로 제출하세요!
-                </h4>
-                <p class="text-[11px] leading-relaxed text-stone-300">
-                    1단계 버튼을 눌러 작성한 내용을 복사한 뒤, 2단계 버튼을 눌러 오픈채팅방에 접속해 붙여넣기(꾹 눌러서 붙여넣기) 해주세요!
-                </p>
-                <div class="space-y-3">
-                    <!-- 1단계: 복사하기 -->
-                    <button onclick="copySubmissionData()" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-black rounded-xl transition-all shadow-md active:scale-95 text-xs flex items-center justify-center gap-1.5">
-                        <span class="bg-[#2e1c0c] text-yellow-300 text-[10px] px-1.5 py-0.5 rounded font-bold mr-1">1단계</span>
-                        <i class="fa-solid fa-copy"></i> 활동 기록 클립보드에 복사하기
-                    </button>
-                    <!-- 2단계: 카카오톡 오픈채팅방 열기 -->
-                    <a href="https://open.kakao.com/o/sVq22nLf" target="_blank" class="w-full py-3.5 bg-yellow-400 hover:bg-yellow-300 text-stone-950 font-black rounded-xl transition-all shadow-md active:scale-95 text-xs flex items-center justify-center gap-1.5 text-center decoration-none block">
-                        <span class="bg-[#2e1c0c] text-yellow-300 text-[10px] px-1.5 py-0.5 rounded font-bold mr-1">2단계</span>
-                        <i class="fa-solid fa-comment"></i> 지수쌤 오픈채팅방 바로가기
-                    </a>
-                    <!-- 비상용 다운로드 -->
-                    <button onclick="downloadSubmissionFile()" class="w-full py-2.5 bg-[#422a16]/50 hover:bg-[#57391f] text-stone-300 rounded-xl text-[11px] transition-all flex items-center justify-center gap-1.5 border border-stone-700/60">
-                        <i class="fa-solid fa-file-arrow-down"></i> 제출이 안 될 때 비상용 메모장(.txt) 다운로드
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <!-- 커스텀 토스트 알림창 -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-stone-900/90 text-white px-5 py-3 rounded-full text-xs font-bold z-50 shadow-xl opacity-0 scale-95 pointer-events-none transition-all duration-300 flex items-center gap-2">
-        <i class="fa-solid fa-circle-check text-green-400"></i>
-        <span id="toast-message">클립보드에 복사 완료!</span>
+<body>
+  <header class="top">
+    <div class="topin">
+      <div class="brand">PAPYRUS <small>망원 책방 탐방</small></div>
+      <div class="badge" id="headerStatus">START</div>
     </div>
+  </header>
 
-    <!-- 스크립트 기능 정의 -->
-    <script>
-        let currentDept = '';
+  <main class="wrap">
+    <section class="hero">
+      <h1>세 곳의 책방을<br>우리 팀 방식으로 걷기</h1>
+      <p class="sub">처음부터 세 곳을 정하지 않아도 됩니다. 한 곳을 다녀온 뒤, 가까운 다음 책방을 추천해 줄게요.</p>
+    </section>
 
-        // 로드 시 초기 데이터 불러오기
-        window.addEventListener('load', () => {
-            const savedData = localStorage.getItem('papyrus_activity_data');
-            if (savedData) {
-                try {
-                    const parsed = JSON.parse(savedData);
-                    // 기본정보 복원
-                    if(parsed.studentId) document.getElementById('student-id').value = parsed.studentId;
-                    if(parsed.studentName) document.getElementById('student-name').value = parsed.studentName;
-                    
-                    // 선택했던 부서 복원
-                    if (parsed.department) {
-                        selectDepartment(parsed.department);
-                        if (parsed.department === 'plan' && parsed.planTeam) {
-                            togglePlanTeam(parsed.planTeam);
-                        }
-                    }
+    <section class="card notice">
+      <p><strong>오늘의 규칙</strong></p>
+      <p class="sub" style="margin-top:6px">팀 대표 1명이 이 사이트를 사용합니다. 같은 휴대폰으로 1차, 2차, 3차 인증을 이어서 진행하세요. 각 책방에서 인증사진 1장씩 총 3장을 남깁니다.</p>
+    </section>
 
-                    // 모든 인풋 데이터 복원
-                    Object.keys(parsed.fields || {}).forEach(key => {
-                        const elem = document.getElementById(key);
-                        if (elem) elem.value = parsed.fields[key];
-                    });
-                } catch (e) {
-                    console.error("데이터 복구 실패:", e);
-                }
-            }
+    <section id="setupCard" class="card">
+      <div class="section-title"><h2><span class="num">1</span>우리 모둠 만들기</h2></div>
+      <label>모둠원은 몇 명인가요?</label>
+      <div class="choice" id="sizeChoice">
+        <button type="button" data-size="2">2명</button>
+        <button type="button" data-size="3">3명</button>
+        <button type="button" data-size="4">4명</button>
+        <button type="button" data-size="5">5명</button>
+      </div>
+      <div id="memberArea" class="hidden">
+        <label>모둠원 학번과 이름</label>
+        <div id="memberInputs" class="members"></div>
+        <button type="button" class="btn primary" style="margin-top:14px" onclick="createTeam()">모둠 코드 만들기</button>
+      </div>
 
-            // 실시간 저장 이벤트 리스너 등록
-            const inputs = document.querySelectorAll('input, textarea');
-            inputs.forEach(input => {
-                input.addEventListener('input', saveData);
-            });
-        });
+      <div id="resumeArea" style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line)">
+        <h3>이미 모둠을 만들었나요?</h3>
+        <p class="small" style="margin-top:4px">대표 학생이 같은 휴대폰을 사용한다면 자동으로 이어집니다. 코드가 필요하면 아래에 입력하세요.</p>
+        <div class="btnrow">
+          <input id="resumeCode" placeholder="예: PAP-4K7Q" maxlength="8" style="text-transform:uppercase" />
+          <button type="button" class="btn ghost" onclick="resumeByCode()">이어하기</button>
+        </div>
+      </div>
+    </section>
 
-        // 탭 상태 유지 및 선택 관리
-        function selectDepartment(dept) {
-            currentDept = dept;
-            
-            // 탭 스타일 초기화 및 선택 효과
-            document.querySelectorAll('.dept-tab').forEach(tab => {
-                tab.classList.remove('bg-amber-900', 'text-white', 'border-transparent', 'shadow-inner');
-                tab.classList.add('bg-white', 'border-stone-200');
-                const text = tab.querySelector('.dept-text');
-                const icon = tab.querySelector('.dept-icon');
-                if(text) text.className = 'text-xs font-bold text-stone-600 dept-text';
-                if(icon) icon.className = icon.className.replace('text-white', 'text-stone-400');
-            });
+    <section id="teamCard" class="card hidden">
+      <div class="section-title">
+        <h2><span class="num">2</span>팀 준비 완료</h2>
+        <button class="btn ghost" style="width:auto;padding:8px 11px" onclick="shareTeamCode()">코드 보내기</button>
+      </div>
+      <div class="codebox">
+        <div class="small">우리 모둠 코드</div>
+        <div class="code" id="teamCodeText"></div>
+        <div id="memberSummary" class="small"></div>
+      </div>
+      <div class="urgent">📣 이 코드를 <b>지금 바로 모둠 카톡방에 보내세요.</b><br>대표 학생이 바뀌거나 헷갈릴 때 확인할 수 있어요.</div>
+      <div class="btnrow">
+        <button class="btn secondary" onclick="copyCode()">코드 복사</button>
+        <button class="btn primary" onclick="shareTeamCode()">카카오톡으로 보내기</button>
+      </div>
+      <label class="checkline">
+        <input type="checkbox" id="sharedCheck" onchange="toggleStartButton()" />
+        <span>모둠 카톡방에 코드를 보냈어요.</span>
+      </label>
+      <button id="startWalkBtn" class="btn primary" style="margin-top:10px" disabled onclick="startWalk()">탐방 시작하기</button>
+    </section>
 
-            const activeTab = document.getElementById(`tab-${dept}`);
-            activeTab.classList.remove('bg-white', 'border-stone-200');
-            activeTab.classList.add('bg-amber-900', 'text-white', 'border-transparent', 'shadow-inner');
-            const activeText = activeTab.querySelector('.dept-text');
-            const activeIcon = activeTab.querySelector('.dept-icon');
-            if(activeText) activeText.className = 'text-xs font-bold text-white dept-text';
-            if(activeIcon) activeIcon.className = activeIcon.className.replace('text-stone-400', 'text-white');
+    <section id="walkCard" class="card hidden">
+      <div class="section-title">
+        <h2><span class="num">3</span><span id="roundTitle">1차 책방 인증</span></h2>
+        <span class="badge" id="roundBadge">0 / 3</span>
+      </div>
+      <div class="progress">
+        <div class="step" id="step1">1차</div>
+        <div class="step" id="step2">2차</div>
+        <div class="step" id="step3">3차</div>
+      </div>
 
-            // 화면 전환
-            document.getElementById('welcome-message').classList.add('hidden');
-            document.querySelectorAll('.dept-content').forEach(content => content.classList.add('hidden'));
-            document.getElementById(`content-${dept}`).classList.remove('hidden');
-            document.getElementById('submission-section').classList.remove('hidden');
+      <div id="recommendBox" class="hidden">
+        <p class="small"><b style="color:var(--green)">가까운 다음 책방 추천</b> · 방금 방문한 곳을 기준으로 골랐어요.</p>
+        <div class="recommend" id="recommendList"></div>
+      </div>
 
-            saveData();
-        }
+      <label>이번에 방문한 책방을 선택하세요.</label>
+      <div id="shopGrid" class="shopgrid"></div>
 
-        // 프로그램 기획부 A/B팀 전환 토글
-        function togglePlanTeam(team) {
-            const btnA = document.getElementById('btn-team-a');
-            const btnB = document.getElementById('btn-team-b');
-            const secA = document.getElementById('plan-team-a-section');
-            const secB = document.getElementById('plan-team-b-section');
+      <div id="photoBox" class="photo hidden">
+        <b id="photoTitle">인증사진 1장</b>
+        <p class="small" style="margin:4px 0 10px">책방 앞 또는 내부에서 팀 방문이 확인되는 사진을 골라주세요.</p>
+        <input id="photoInput" type="file" accept="image/*" capture="environment" />
+        <img id="photoPreview" class="preview hidden" alt="인증사진 미리보기" />
+        <button class="btn primary" style="margin-top:12px" onclick="saveVisit()">이번 책방 인증 완료</button>
+      </div>
+    </section>
 
-            if (team === 'A') {
-                btnA.className = 'py-2 rounded-xl text-xs font-bold transition-all border border-amber-400 bg-amber-500 text-white';
-                btnB.className = 'py-2 rounded-xl text-xs font-bold transition-all border border-stone-600 bg-[#402e29] text-stone-400';
-                secA.classList.remove('hidden');
-                secB.classList.add('hidden');
-            } else {
-                btnA.className = 'py-2 rounded-xl text-xs font-bold transition-all border border-stone-600 bg-[#402e29] text-stone-400';
-                btnB.className = 'py-2 rounded-xl text-xs font-bold transition-all border border-amber-400 bg-amber-500 text-white';
-                secA.classList.add('hidden');
-                secB.classList.remove('hidden');
-            }
-            saveData();
-        }
+    <section id="logCard" class="card hidden">
+      <h3>우리 팀 탐방 기록</h3>
+      <div id="visitLog" class="visitlog"></div>
+    </section>
 
-        // 로컬 데이터 수집 기능
-        function collectData() {
-            const studentId = document.getElementById('student-id').value;
-            const studentName = document.getElementById('student-name').value;
-            
-            let planTeam = 'A';
-            if (currentDept === 'plan' && document.getElementById('btn-team-b').classList.contains('bg-amber-500')) {
-                planTeam = 'B';
-            }
+    <section id="completeCard" class="card complete hidden">
+      <h2>🎉 세 곳 탐방 완료!</h2>
+      <p class="sub" style="margin-top:6px">마지막으로 모둠 정보와 인증사진 3장을 카카오톡으로 한 번에 공유해 제출하세요.</p>
+      <button class="btn" style="margin-top:14px;background:white;color:var(--green)" onclick="shareFinal()">카카오톡으로 최종 제출</button>
+      <button class="btn" style="margin-top:8px;background:#dfeee7;color:var(--green)" onclick="copyFinalSummary()">제출 문구만 복사</button>
+    </section>
 
-            const data = {
-                studentId,
-                studentName,
-                department: currentDept,
-                planTeam,
-                fields: {}
-            };
+    <section class="card flat">
+      <div class="section-title"><h3>책방 전체 목록</h3><span class="small">8곳</span></div>
+      <div id="allShops" class="visitlog"></div>
+    </section>
 
-            // 활성 부서의 인풋 필드 수집
-            const contentDiv = document.getElementById(`content-${currentDept}`);
-            if (contentDiv) {
-                const inputs = contentDiv.querySelectorAll('input, textarea');
-                inputs.forEach(input => {
-                    data.fields[input.id] = input.value;
-                });
-            }
+    <button class="btn danger reset" onclick="resetAll()">이 기기의 탐방 기록 초기화</button>
+    <footer class="footer">대인고등학교 도서부 파피루스 · 망원동 책방 탐방</footer>
+  </main>
 
-            return data;
-        }
+  <div id="codeModal" class="modal hidden">
+    <div class="sheet">
+      <h2>모둠 코드가 생겼어요!</h2>
+      <p class="sub" style="margin-top:5px">잊기 전에 지금 바로 카톡방에 보내세요.</p>
+      <div class="codebox">
+        <div class="code" id="modalCode"></div>
+        <div class="small">대표 학생은 오늘 활동이 끝날 때까지 같은 휴대폰을 사용해 주세요.</div>
+      </div>
+      <button class="btn primary" style="margin-top:12px" onclick="shareTeamCode()">카카오톡으로 지금 보내기</button>
+      <button class="btn secondary" style="margin-top:8px" onclick="copyCode()">코드 복사하기</button>
+      <label class="checkline">
+        <input type="checkbox" id="modalSharedCheck" onchange="syncSharedCheck(this.checked)" />
+        <span>카톡방에 보냈어요.</span>
+      </label>
+      <button id="modalContinueBtn" class="btn ghost" style="margin-top:10px" disabled onclick="closeCodeModal()">확인, 탐방 준비하기</button>
+    </div>
+  </div>
 
-        // 로컬스토리지 임시 백업
-        function saveData() {
-            const data = collectData();
-            localStorage.setItem('papyrus_activity_data', JSON.stringify(data));
-        }
+  <div id="toast" class="toast"></div>
 
-        // 텍스트 정렬 가공 (제출 포맷)
-        function generatePlainTextResult() {
-            const d = collectData();
-            let deptLabel = '';
-            if (d.department === 'insta') deptLabel = '인스타 운영부';
-            if (d.department === 'plan') deptLabel = `프로그램 기획부 (${d.planTeam}팀)`;
-            if (d.department === 'pr') deptLabel = '홍보부';
+<script>
+const SHOPS = [
+  {id:'low', name:'로우북스', addr:'서울 마포구 포은로 56', near:['denmark','zero','travel']},
+  {id:'denmark', name:'덴마크 서재', addr:'서울 마포구 포은로 61', near:['low','zero','travel']},
+  {id:'tailtango', name:'테일탱고', addr:'서울 마포구 망원로 62-3', near:['gaga','summer','seasons']},
+  {id:'gaga', name:'가가77페이지', addr:'서울 마포구 망원로 74-1', near:['tailtango','summer','seasons']},
+  {id:'zero', name:'제로헌드레드', addr:'서울 마포구 희우정로10길 33', near:['summer','low','denmark']},
+  {id:'summer', name:'여름맨숀', addr:'서울 마포구 희우정로10길 2', near:['zero','tailtango','gaga']},
+  {id:'travel', name:'여행마을', addr:'서울 마포구 월드컵로17길 57', near:['low','denmark','seasons']},
+  {id:'seasons', name:'시즌스', addr:'서울 마포구 망원로3길 15', near:['travel','gaga','tailtango']}
+];
 
-            let report = `==============================\n`;
-            report += `📜 파피루스 도서부 외부활동 보고서\n`;
-            report += `==============================\n\n`;
-            report += `👤 작성자: ${d.studentId || '미기입'} ${d.studentName || '미기입'}\n`;
-            report += `👥 소속: ${deptLabel}\n\n`;
+const STATE_KEY = 'papyrus_mangwon_v3';
+let state = loadState();
+let teamSize = 0;
+let selectedShop = null;
+let pendingPhotoBlob = null;
 
-            if (d.department === 'insta') {
-                report += `[① 서울광장 야외도서관]\n`;
-                report += `- 광장 사람들 관찰: ${d.fields['insta-q1'] || '미기입'}\n`;
-                report += `- 공간 매력 포인트: ${d.fields['insta-q2'] || '미기입'}\n`;
-                report += `- 릴스 콘셉트 기획: ${d.fields['insta-q3'] || '미기입'}\n\n`;
-                
-                report += `[② 서울시립미술관]\n`;
-                report += `- 인상적이었던 전시: ${d.fields['insta-q4'] || '미기입'}\n`;
-                report += `- 전시 연계 도서화 아이디어: ${d.fields['insta-q5'] || '미기입'}\n\n`;
+function $(id){ return document.getElementById(id); }
+function toast(msg){
+  const el=$('toast'); el.textContent=msg; el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),1800);
+}
+function loadState(){
+  try { return JSON.parse(localStorage.getItem(STATE_KEY)) || null; } catch(e){ return null; }
+}
+function saveState(){ localStorage.setItem(STATE_KEY, JSON.stringify(state)); }
+function mapUrl(name){ return 'https://map.naver.com/p/search/' + encodeURIComponent(name + ' 망원'); }
+function shopById(id){ return SHOPS.find(s=>s.id===id); }
 
-                report += `[③ 최종 릴스 기획]\n`;
-                report += `* 해당 미션은 촬영 소스를 수집한 후 다음 동아리 회의 시간에 함께 기획할 예정입니다.\n`;
-            } else if (d.department === 'plan') {
-                if (d.planTeam === 'A') {
-                    report += `[A팀: 서울광장 중심 분석]\n`;
-                    report += `- 특별한 장점 3가지: ${d.fields['plan-a-q1'] || '미기입'}\n`;
-                    report += `- 사람들을 머무르게 하는 법: ${d.fields['plan-a-q2'] || '미기입'}\n`;
-                    report += `- 우리 학교 적용점: ${d.fields['plan-a-q3'] || '미기입'}\n\n`;
-                } else {
-                    report += `[B팀: 미술관 중심 분석]\n`;
-                    report += `- 기억에 남는 전시 특징: ${d.fields['plan-b-q1'] || '미기입'}\n`;
-                    report += `- 도서관 협동 프로그램 구상: ${d.fields['plan-b-q2'] || '미기입'}\n\n`;
-                }
-                report += `[최종 기획: 우리 도서관 프로그램]\n`;
-                report += `* 해당 미션은 현장 수집 아이디어를 바탕으로 다음 동아리 회의 시간에 최종 제작할 예정입니다.\n`;
-            } else if (d.department === 'pr') {
-                report += `[① 서울광장 야외도서관]\n`;
-                report += `- 눈을 끄는 시각 요소: ${d.fields['pr-q1'] || '미기입'}\n`;
-                report += `- 자율 참여 극대화 장치: ${d.fields['pr-q2'] || '미기입'}\n\n`;
+document.querySelectorAll('#sizeChoice button').forEach(btn=>{
+  btn.addEventListener('click',()=>setTeamSize(Number(btn.dataset.size)));
+});
 
-                report += `[② 서울시립미술관]\n`;
-                report += `- 눈에 띈 오프라인 홍보법: ${d.fields['pr-q3'] || '미기입'}\n`;
-                report += `- 홍보부 시선 적용 포인트: ${d.fields['pr-q4'] || '미기입'}\n\n`;
+function setTeamSize(size){
+  teamSize=size;
+  document.querySelectorAll('#sizeChoice button').forEach(b=>b.classList.toggle('on',Number(b.dataset.size)===size));
+  const box=$('memberInputs'); box.innerHTML='';
+  for(let i=1;i<=size;i++){
+    const row=document.createElement('div'); row.className='member';
+    row.innerHTML=`<input id="sid${i}" placeholder="${i}번 학번" inputmode="numeric"><input id="sname${i}" placeholder="${i}번 이름">`;
+    box.appendChild(row);
+  }
+  $('memberArea').classList.remove('hidden');
+}
 
-                report += `[③ 최종 홍보 기획안]\n`;
-                report += `* 해당 미션은 신규 도서 프로그램 테마에 맞춰 다음 동아리 회의 시간에 공동 제작할 예정입니다.\n`;
-            }
+function makeCode(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const a=new Uint32Array(4); crypto.getRandomValues(a);
+  let out='PAP-'; for(let i=0;i<4;i++) out += chars[a[i]%chars.length];
+  return out;
+}
 
-            report += `\n==============================\n`;
-            report += `파피루스 - 더 넓은 세상의 책과 소통합니다.`;
-            return report;
-        }
+function createTeam(){
+  if(!teamSize) return toast('모둠 인원을 먼저 선택하세요.');
+  const members=[];
+  for(let i=1;i<=teamSize;i++){
+    const sid=$('sid'+i).value.trim(), name=$('sname'+i).value.trim();
+    if(!sid || !name) return toast(`${i}번 모둠원의 학번과 이름을 입력하세요.`);
+    members.push({sid,name});
+  }
+  state={code:makeCode(),members,visits:[],createdAt:new Date().toISOString(),started:false};
+  saveState();
+  renderTeam();
+  $('codeModal').classList.remove('hidden');
+  $('modalCode').textContent=state.code;
+}
 
-        // 토스트 팝업 띄우기
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-message').innerText = msg;
-            toast.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
-            toast.classList.add('opacity-100', 'scale-100');
+function renderTeam(){
+  if(!state) return;
+  $('setupCard').classList.add('hidden');
+  $('teamCard').classList.remove('hidden');
+  $('teamCodeText').textContent=state.code;
+  $('memberSummary').textContent=state.members.map(m=>`${m.sid} ${m.name}`).join(' · ');
+  $('headerStatus').textContent=state.code;
+  if(state.started) startWalk(true);
+}
 
-            setTimeout(() => {
-                toast.classList.remove('opacity-100', 'scale-100');
-                toast.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-            }, 3000);
-        }
+function teamText(){
+  return `[파피루스 망원 책방 탐방]\n우리 모둠 코드: ${state.code}\n모둠원: ${state.members.map(m=>`${m.sid} ${m.name}`).join(', ')}\n\n📌 이 코드를 모둠 카톡방에 보관하세요. 대표 학생은 같은 휴대폰으로 활동을 이어갑니다.`;
+}
 
-        // 복사하기 기능 (iFrame 대응 fallback 적용)
-        function copySubmissionData() {
-            const text = generatePlainTextResult();
-            
-            // 스마트폰 복사 fallback 처리
-            const tempTextArea = document.createElement("textarea");
-            tempTextArea.value = text;
-            tempTextArea.style.position = "fixed";  // 화면 가림 방지
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            tempTextArea.setSelectionRange(0, 99999); // 모바일 대응
+async function shareTeamCode(){
+  if(!state) return;
+  const text=teamText();
+  try{
+    if(navigator.share) await navigator.share({title:'파피루스 모둠 코드',text});
+    else { await navigator.clipboard.writeText(text); toast('카톡에 붙여넣을 문구를 복사했어요.'); }
+  }catch(e){ if(e.name!=='AbortError') copyCode(); }
+}
 
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showToast("📋 1단계 완료! 이제 2단계를 눌러 지수쌤께 전송하세요.");
-                } else {
-                    throw new Error("Copy command failed");
-                }
-            } catch (err) {
-                console.error(err);
-                showToast("복사 실패. 직접 아래 내용을 전체 선택해서 복사해 주세요.");
-            }
-            document.body.removeChild(tempTextArea);
-        }
+async function copyCode(){
+  if(!state) return;
+  try{ await navigator.clipboard.writeText(teamText()); toast('모둠 코드와 명단을 복사했어요.'); }
+  catch(e){ toast('코드: '+state.code); }
+}
+function syncSharedCheck(v){
+  $('sharedCheck').checked=v; $('modalContinueBtn').disabled=!v; toggleStartButton();
+}
+function toggleStartButton(){
+  const v=$('sharedCheck').checked; $('startWalkBtn').disabled=!v;
+  $('modalSharedCheck').checked=v; $('modalContinueBtn').disabled=!v;
+}
+function closeCodeModal(){ $('codeModal').classList.add('hidden'); }
+function startWalk(fromRestore=false){
+  if(!fromRestore && !$('sharedCheck').checked) return toast('먼저 모둠 코드를 카톡방에 보내주세요.');
+  state.started=true; saveState();
+  $('teamCard').classList.add('hidden');
+  $('walkCard').classList.remove('hidden');
+  $('logCard').classList.remove('hidden');
+  $('codeModal').classList.add('hidden');
+  renderWalk();
+}
 
-        // 텍스트 파일 (.txt) 다운로드 기능
-        function downloadSubmissionFile() {
-            const d = collectData();
-            const text = generatePlainTextResult();
-            const filename = `파피루스활동지_${d.studentId || ''}_${d.studentName || '미기입'}.txt`;
-            
-            const blob = new Blob([text], { type: 'text/plain;charset=utf-8;' });
-            const link = document.createElement("a");
-            
-            if (navigator.msSaveBlob) { // IE 10+
-                navigator.msSaveBlob(blob, filename);
-            } else {
-                const url = URL.createObjectURL(blob);
-                link.setAttribute("href", url);
-                link.setAttribute("download", filename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-            showToast("메모장 파일이 다운로드되었습니다.");
-        }
-    </script>
+function renderWalk(){
+  if(!state) return;
+  const n=state.visits.length;
+  $('roundBadge').textContent=`${n} / 3`;
+  for(let i=1;i<=3;i++) $('step'+i).classList.toggle('done',i<=n);
+  renderLog();
+  if(n>=3){
+    $('walkCard').classList.add('hidden');
+    $('completeCard').classList.remove('hidden');
+    $('headerStatus').textContent='COMPLETE';
+    return;
+  }
+  $('roundTitle').textContent=`${n+1}차 책방 인증`;
+  $('photoTitle').textContent=`${n+1}차 인증사진 1장`;
+  selectedShop=null; pendingPhotoBlob=null;
+  $('photoInput').value=''; $('photoPreview').src=''; $('photoPreview').classList.add('hidden'); $('photoBox').classList.add('hidden');
+  renderShops();
+  renderRecommendations();
+}
+
+function renderRecommendations(){
+  const box=$('recommendBox'), list=$('recommendList'); list.innerHTML='';
+  if(!state.visits.length){ box.classList.add('hidden'); return; }
+  const last=shopById(state.visits[state.visits.length-1].shopId);
+  const visited=new Set(state.visits.map(v=>v.shopId));
+  let ids=last.near.filter(id=>!visited.has(id));
+  if(ids.length<3) ids=ids.concat(SHOPS.map(s=>s.id).filter(id=>id!==last.id&&!visited.has(id)&&!ids.includes(id))).slice(0,3);
+  ids.forEach(id=>{
+    const s=shopById(id); const b=document.createElement('button'); b.className='chip'; b.type='button';
+    b.textContent=s.name; b.onclick=()=>chooseShop(id); list.appendChild(b);
+  });
+  box.classList.remove('hidden');
+}
+
+function renderShops(){
+  const grid=$('shopGrid'); grid.innerHTML='';
+  const visited=new Set(state.visits.map(v=>v.shopId));
+  SHOPS.filter(s=>!visited.has(s.id)).forEach(s=>{
+    const el=document.createElement('div'); el.className='shop'; el.id='shop-'+s.id;
+    el.innerHTML=`<div class="shophead"><div><div class="shopname">${s.name}</div><div class="addr">${s.addr}</div></div><a class="map" href="${mapUrl(s.name)}" target="_blank" rel="noopener">지도 보기 ↗</a></div>
+      <button type="button" class="btn secondary" style="margin-top:10px" onclick="chooseShop('${s.id}')">이번 책방으로 선택</button>`;
+    grid.appendChild(el);
+  });
+}
+function chooseShop(id){
+  selectedShop=id;
+  document.querySelectorAll('.shop').forEach(x=>x.classList.remove('selected'));
+  const el=$('shop-'+id); if(el) el.classList.add('selected');
+  $('photoBox').classList.remove('hidden');
+  $('photoBox').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+$('photoInput').addEventListener('change', async e=>{
+  const file=e.target.files[0]; if(!file) return;
+  pendingPhotoBlob=await compressImage(file);
+  $('photoPreview').src=URL.createObjectURL(pendingPhotoBlob);
+  $('photoPreview').classList.remove('hidden');
+});
+
+function compressImage(file){
+  return new Promise((resolve,reject)=>{
+    const img=new Image(), url=URL.createObjectURL(file);
+    img.onload=()=>{
+      let w=img.width,h=img.height,max=1400;
+      if(Math.max(w,h)>max){ const r=max/Math.max(w,h); w=Math.round(w*r); h=Math.round(h*r); }
+      const c=document.createElement('canvas'); c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      c.toBlob(blob=>{URL.revokeObjectURL(url); blob?resolve(blob):reject(new Error('압축 실패'));},'image/jpeg',.82);
+    };
+    img.onerror=reject; img.src=url;
+  });
+}
+
+function openDb(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open('papyrus_mangwon_photos',1);
+    req.onupgradeneeded=()=>{ if(!req.result.objectStoreNames.contains('photos')) req.result.createObjectStore('photos'); };
+    req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error);
+  });
+}
+async function putPhoto(key,blob){
+  const db=await openDb(); return new Promise((resolve,reject)=>{
+    const tx=db.transaction('photos','readwrite'); tx.objectStore('photos').put(blob,key);
+    tx.oncomplete=()=>resolve(); tx.onerror=()=>reject(tx.error);
+  });
+}
+async function getPhoto(key){
+  const db=await openDb(); return new Promise((resolve,reject)=>{
+    const req=db.transaction('photos','readonly').objectStore('photos').get(key);
+    req.onsuccess=()=>resolve(req.result||null); req.onerror=()=>reject(req.error);
+  });
+}
+async function clearPhotos(){
+  const db=await openDb(); return new Promise((resolve,reject)=>{
+    const tx=db.transaction('photos','readwrite'); tx.objectStore('photos').clear();
+    tx.oncomplete=resolve; tx.onerror=()=>reject(tx.error);
+  });
+}
+
+async function saveVisit(){
+  if(!selectedShop) return toast('이번 책방을 먼저 선택하세요.');
+  if(!pendingPhotoBlob) return toast('인증사진 1장을 선택하세요.');
+  const round=state.visits.length+1;
+  const key=`${state.code}-visit-${round}`;
+  try{
+    await putPhoto(key,pendingPhotoBlob);
+    state.visits.push({shopId:selectedShop,photoKey:key,time:new Date().toISOString()});
+    saveState(); toast(`${round}차 인증 완료!`);
+    renderWalk();
+  }catch(e){ toast('사진 저장에 실패했어요. 다시 시도하세요.'); }
+}
+
+function renderLog(){
+  const log=$('visitLog'); log.innerHTML='';
+  state.visits.forEach((v,i)=>{
+    const s=shopById(v.shopId); const d=document.createElement('div'); d.className='visititem';
+    d.innerHTML=`<b>${i+1}차</b> ${s.name} <span class="small">· 인증사진 저장 완료</span>`;
+    log.appendChild(d);
+  });
+  if(!state.visits.length) log.innerHTML='<div class="visititem small">아직 인증한 책방이 없습니다.</div>';
+}
+
+function finalText(){
+  return `[파피루스 망원 책방 탐방 완료]\n팀 코드: ${state.code}\n모둠원: ${state.members.map(m=>`${m.sid} ${m.name}`).join(', ')}\n\n` +
+    state.visits.map((v,i)=>`${i+1}차: ${shopById(v.shopId).name}`).join('\n') +
+    `\n\n인증사진 3장을 함께 제출합니다.`;
+}
+async function shareFinal(){
+  try{
+    const files=[];
+    for(let i=0;i<state.visits.length;i++){
+      const v=state.visits[i], blob=await getPhoto(v.photoKey);
+      if(blob) files.push(new File([blob],`${i+1}차_${shopById(v.shopId).name}.jpg`,{type:'image/jpeg'}));
+    }
+    const data={title:'파피루스 망원 책방 탐방 제출',text:finalText(),files};
+    if(files.length===3 && navigator.canShare && navigator.canShare({files}) && navigator.share){
+      await navigator.share(data);
+    } else if(navigator.share){
+      await navigator.share({title:data.title,text:data.text});
+      toast('사진 첨부가 지원되지 않으면 갤러리의 인증사진도 함께 보내주세요.');
+    } else {
+      await navigator.clipboard.writeText(data.text); toast('제출 문구를 복사했어요.');
+    }
+  }catch(e){ if(e.name!=='AbortError') toast('공유가 안 되면 제출 문구 복사를 이용하세요.'); }
+}
+async function copyFinalSummary(){
+  try{ await navigator.clipboard.writeText(finalText()); toast('최종 제출 문구를 복사했어요.'); }catch(e){}
+}
+
+function resumeByCode(){
+  const code=$('resumeCode').value.trim().toUpperCase();
+  if(!state){ return toast('이 휴대폰에 저장된 모둠 기록이 없어요. 새 모둠을 만들어 주세요.'); }
+  if(code!==state.code) return toast('이 휴대폰에 저장된 모둠 코드와 달라요.');
+  renderTeam(); toast('저장된 탐방 기록을 불러왔어요.');
+}
+
+async function resetAll(){
+  if(!confirm('이 휴대폰에 저장된 모둠 정보와 인증사진을 모두 지울까요?')) return;
+  localStorage.removeItem(STATE_KEY);
+  try{ await clearPhotos(); }catch(e){}
+  location.reload();
+}
+
+function renderAllShops(){
+  $('allShops').innerHTML=SHOPS.map(s=>`<div class="visititem"><b>${s.name}</b><br><span class="small">${s.addr} · <a class="map" href="${mapUrl(s.name)}" target="_blank" rel="noopener">네이버지도</a></span></div>`).join('');
+}
+renderAllShops();
+
+if(state){
+  $('setupCard').classList.add('hidden');
+  renderTeam();
+  if(!state.started){
+    $('sharedCheck').checked=true; toggleStartButton();
+  }
+}
+</script>
 </body>
 </html>
